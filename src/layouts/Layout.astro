@@ -10,6 +10,10 @@ const {
 	title = 'PollyPM | AI Project Management for Multi-Agent Engineering Teams',
 	description = 'PollyPM orchestrates Claude, Codex, and other AI agents across projects with failover, heartbeat supervision, worktree isolation, and one operator-grade CLI.',
 } = Astro.props;
+
+const site = Astro.site ?? new URL('https://pollypm.com');
+const canonicalUrl = new URL(Astro.url.pathname, site);
+const socialImage = new URL('/favicon.svg', site);
 ---
 
 <!doctype html>
@@ -27,6 +31,17 @@ const {
 		/>
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta property="og:site_name" content="PollyPM" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={socialImage} />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={socialImage} />
 		<title>{title}</title>
 	</head>
 	<body>
