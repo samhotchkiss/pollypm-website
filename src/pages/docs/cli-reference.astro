@@ -1,0 +1,269 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const commandGroups = [
+	{
+		title: 'Project setup',
+		items: [
+			{
+				command: 'pollypm init --project launch-redesign --repo web=~/dev/company-web --repo api=~/dev/company-api',
+				description: 'Create a project and register the repositories PollyPM should supervise.',
+			},
+			{
+				command: 'pollypm project show --project launch-redesign',
+				description: 'Inspect the current project definition, repo mapping, and active lanes.',
+			},
+		],
+	},
+	{
+		title: 'Launching work',
+		items: [
+			{
+				command: 'pollypm launch --project launch-redesign --session frontend-refresh --task "Refresh homepage copy"',
+				description: 'Start a new lane with a clear session name and a bounded task.',
+			},
+			{
+				command: 'pollypm launch --project launch-redesign --session docs-pass --task "Expand docs" --provider openai:gpt-5.4',
+				description: 'Launch a lane with an explicit provider path when you need to override the project default.',
+			},
+		],
+	},
+	{
+		title: 'Monitoring and recovery',
+		items: [
+			{
+				command: 'pollypm monitor --project launch-redesign',
+				description: 'Open the operator view for session health, heartbeats, and failover state.',
+			},
+			{
+				command: 'pollypm handoff --session docs-pass --to operator',
+				description: 'Bring a lane back to human review without losing its execution context.',
+			},
+			{
+				command: 'pollypm restart --session api-followup',
+				description: 'Restart a failed or wedged lane when the task is still valid and should continue.',
+			},
+		],
+	},
+	{
+		title: 'Provider routing',
+		items: [
+			{
+				command: 'pollypm providers set-default --provider openai:gpt-5.4',
+				description: 'Set the default provider path for new sessions.',
+			},
+			{
+				command: 'pollypm providers set-fallback --primary openai:gpt-5.4 --fallback anthropic:claude-sonnet',
+				description: 'Configure the fallback route PollyPM can use when the primary provider is blocked.',
+			},
+		],
+	},
+];
+
+const configFiles = [
+	{
+		title: '.env style shell config',
+		description: 'Keep credentials and provider defaults outside source control and load them before launching PollyPM.',
+		content: `export OPENAI_API_KEY="sk-live-..."
+export ANTHROPIC_API_KEY="sk-ant-..."
+export POLLYPM_DEFAULT_PROVIDER="openai:gpt-5.4"
+export POLLYPM_FALLBACK_PROVIDER="anthropic:claude-sonnet"`,
+	},
+	{
+		title: 'Project config example',
+		description: 'A practical project definition keeps repos, defaults, and lane intent explicit.',
+		content: `project: launch-redesign
+repos:
+  web: ~/dev/company-web
+  api: ~/dev/company-api
+defaults:
+  provider: openai:gpt-5.4
+  fallbackProvider: anthropic:claude-sonnet
+lanes:
+  - name: frontend-refresh
+    repo: web
+    branch: agent/frontend-refresh
+  - name: api-followup
+    repo: api
+    branch: agent/api-followup`,
+	},
+];
+
+const practicalNotes = [
+	'Name sessions after deliverables, not people. `frontend-refresh` is easier to monitor than `sam-task`.',
+	'Set an explicit task string on launch so operators know why a lane exists when they revisit it later.',
+	'Use worktree-backed lanes for any task that will modify files, even if the change seems small.',
+	'Check `pollypm monitor` before restarting a lane. A provider issue and a task issue need different responses.',
+];
+
+const commonIssues = [
+	{
+		title: 'Provider key missing',
+		description: 'If commands launch but sessions fail immediately, confirm the relevant API key is exported in the shell that started PollyPM.',
+	},
+	{
+		title: 'Wrong repo path',
+		description: 'If a project initializes but no useful work happens, confirm each configured repository path exists on the local machine.',
+	},
+	{
+		title: 'Session names are too vague',
+		description: 'If monitor output is hard to interpret, rename or relaunch lanes with task-oriented names and clearer task strings.',
+	},
+	{
+		title: 'Fallback is untested',
+		description: 'Do not assume failover works because it is configured. Exercise it during a small pilot before you depend on it.',
+	},
+];
+---
+
+<Layout
+	title="CLI and Configuration Reference | PollyPM Docs"
+	description="Practical CLI commands, configuration examples, and operating notes for PollyPM."
+>
+	<div class="page-shell">
+		<header class="site-header">
+			<div class="container nav-row">
+				<a class="brand" href="/">
+					<span class="brand-mark"><span>PP</span></span>
+					<span class="brand-copy">
+						<small>PollyPM Docs</small>
+						<strong>CLI and Configuration Reference</strong>
+					</span>
+				</a>
+				<nav class="nav-links" aria-label="Documentation">
+					<a href="/">Home</a>
+					<a href="/docs/getting-started">Getting Started</a>
+					<a href="/docs/concepts">Concepts</a>
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			<section class="docs-hero">
+				<div class="container">
+					<span class="eyebrow">Documentation</span>
+					<h1>CLI commands and config you will actually use.</h1>
+					<p>
+						This page is a practical reference for day-one PollyPM operation: project setup, launch
+						commands, provider routing, config examples, and a short list of common mistakes.
+					</p>
+					<div class="docs-meta">
+						<span class="chip">CLI</span>
+						<span class="chip">Configuration</span>
+						<span class="chip">Operations</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="container">
+					<div class="section-heading">
+						<h2>Command reference</h2>
+						<p>These commands cover the normal operator loop from initialization to recovery.</p>
+					</div>
+					<div class="docs-grid">
+						{
+							commandGroups.map((group) => (
+								<article class="doc-card">
+									<strong>{group.title}</strong>
+									<ul class="command-list">
+										{group.items.map((item) => (
+											<li>
+												<code>{item.command}</code>
+												<span>{item.description}</span>
+											</li>
+										))}
+									</ul>
+								</article>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="container split-grid">
+					<div class="info-panel">
+						<div class="section-heading">
+							<h2>Configuration examples</h2>
+							<p>Keep config explicit so providers, repos, and lane intent are easy to inspect later.</p>
+						</div>
+						<ul class="command-list">
+							{
+								configFiles.map((item) => (
+									<li>
+										<code>{item.title}</code>
+										<span>{item.description}</span>
+										<pre><code>{item.content}</code></pre>
+									</li>
+								))
+							}
+						</ul>
+					</div>
+
+					<div class="info-panel">
+						<div class="section-heading">
+							<h2>Practical notes</h2>
+							<p>These habits make the CLI output easier to operate once several lanes are active.</p>
+						</div>
+						<ul>
+							{practicalNotes.map((item) => <li>{item}</li>)}
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="container">
+					<div class="section-heading">
+						<h2>Common issues</h2>
+						<p>Most failures in early PollyPM usage come from environment or naming discipline, not from the command surface itself.</p>
+					</div>
+					<div class="concept-grid">
+						{
+							commonIssues.map((item) => (
+								<article class="doc-card">
+									<strong>{item.title}</strong>
+									<p>{item.description}</p>
+								</article>
+							))
+						}
+					</div>
+
+					<div class="cta-panel">
+						<div>
+							<h2>Use this page alongside getting started.</h2>
+							<p>
+								Get the system running with the onboarding guide, then come here when you need a fast
+								reference for commands, config, and common operator decisions.
+							</p>
+						</div>
+						<div class="button-row">
+							<a class="button button-primary" href="/docs/getting-started">Open getting started</a>
+							<a class="button button-secondary" href="/docs/concepts">Read concepts</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="container footer-row">
+				<div>
+					<a class="brand" href="/">
+						<span class="brand-mark"><span>PP</span></span>
+						<span class="brand-copy">
+							<small>PollyPM</small>
+							<strong>CLI and configuration reference for multi-agent operations</strong>
+						</span>
+					</a>
+				</div>
+				<nav class="footer-links" aria-label="Footer">
+					<a href="/">Home</a>
+					<a href="/docs/getting-started">Getting Started</a>
+					<a href="/docs/concepts">Concepts</a>
+				</nav>
+			</div>
+		</footer>
+	</div>
+</Layout>
