@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const docs = [
+	{
+		title: 'Getting Started',
+		description: 'Install PollyPM, configure providers, and launch your first managed project.',
+		href: '/docs/getting-started',
+	},
+	{
+		title: 'Concepts and Architecture',
+		description: 'Understand projects, sessions, worktrees, provider paths, and the control-plane model.',
+		href: '/docs/concepts',
+	},
+	{
+		title: 'CLI and Configuration Reference',
+		description: 'Use practical commands, config examples, and day-one operator guidance.',
+		href: '/docs/cli-reference',
+	},
+];
+---
+
+<Layout
+	title="Documentation | PollyPM Docs"
+	description="Browse the PollyPM documentation: getting started, concepts, and CLI reference."
+>
+	<div class="page-shell">
+		<header class="site-header">
+			<div class="container nav-row">
+				<a class="brand" href="/">
+					<span class="brand-mark"><span>PP</span></span>
+					<span class="brand-copy">
+						<small>PollyPM Docs</small>
+						<strong>Documentation</strong>
+					</span>
+				</a>
+				<nav class="nav-links" aria-label="Documentation">
+					<a href="/">Home</a>
+					<a href="/docs/getting-started">Getting Started</a>
+					<a href="/docs/concepts">Concepts</a>
+					<a href="/docs/cli-reference">CLI Reference</a>
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			<section class="docs-hero">
+				<div class="container">
+					<span class="eyebrow">Documentation</span>
+					<h1>Everything you need to run PollyPM.</h1>
+					<p>
+						Start with installation and first-run guidance, then move into architecture and command
+						reference as your operator workflow gets more serious.
+					</p>
+					<div class="docs-meta">
+						<span class="chip">Onboarding</span>
+						<span class="chip">Concepts</span>
+						<span class="chip">Reference</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="container">
+					<div class="section-heading">
+						<h2>Documentation paths</h2>
+						<p>Choose the page that matches where you are in the rollout.</p>
+					</div>
+					<div class="docs-grid">
+						{
+							docs.map((doc) => (
+								<a class="doc-card doc-link-card" href={doc.href}>
+									<strong>{doc.title}</strong>
+									<p>{doc.description}</p>
+								</a>
+							))
+						}
+					</div>
+
+					<div class="cta-panel">
+						<div>
+							<h2>Most teams should start with getting started.</h2>
+							<p>
+								If you are new to PollyPM, begin with installation and the first-run guide. Come back
+								here when you need a fast path into concepts or CLI reference.
+							</p>
+						</div>
+						<div class="button-row">
+							<a class="button button-primary" href="/docs/getting-started">Open getting started</a>
+							<a class="button button-secondary" href="/">Back to homepage</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="container footer-row">
+				<div class="footer-brand-block">
+					<a class="brand" href="/">
+						<span class="brand-mark"><span>PP</span></span>
+						<span class="brand-copy">
+							<small>PollyPM</small>
+							<strong>Documentation for multi-agent engineering operations</strong>
+						</span>
+					</a>
+				</div>
+				<div class="footer-link-groups">
+					<nav class="footer-nav-group" aria-label="Docs">
+						<strong>Docs</strong>
+						<a href="/docs/getting-started">Getting Started</a>
+						<a href="/docs/concepts">Concepts</a>
+						<a href="/docs/cli-reference">CLI Reference</a>
+					</nav>
+					<nav class="footer-nav-group" aria-label="Site">
+						<strong>Site</strong>
+						<a href="/">Home</a>
+						<a href="/#features">Features</a>
+						<a href="/#how-it-works">How it works</a>
+					</nav>
+				</div>
+			</div>
+		</footer>
+	</div>
+</Layout>
