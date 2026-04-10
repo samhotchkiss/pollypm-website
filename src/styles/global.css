@@ -650,6 +650,11 @@ pre {
 	background: rgba(255, 255, 255, 0.035);
 }
 
+.doc-link-card {
+	display: block;
+	text-decoration: none;
+}
+
 .command-list {
 	display: grid;
 	gap: 0.9rem;
@@ -739,11 +744,44 @@ pre {
 
 .footer-row {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: space-between;
-	gap: 1rem;
+	gap: 2.5rem;
 	padding-top: 1.4rem;
 	border-top: 1px solid rgba(153, 182, 222, 0.1);
+}
+
+.footer-brand-block {
+	max-width: 30rem;
+}
+
+.footer-link-groups {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(160px, 1fr));
+	gap: 1.5rem 2.5rem;
+}
+
+.footer-nav-group {
+	display: grid;
+	gap: 0.45rem;
+}
+
+.footer-nav-group strong {
+	font-family: 'Space Grotesk', sans-serif;
+	font-size: 0.92rem;
+	letter-spacing: 0.02em;
+	color: var(--text-strong);
+	margin-bottom: 0.25rem;
+}
+
+.footer-nav-group a {
+	color: var(--muted);
+	text-decoration: none;
+	font-size: 0.95rem;
+}
+
+.footer-nav-group a:hover {
+	color: var(--text);
 }
 
 @media (max-width: 960px) {
@@ -769,6 +807,10 @@ pre {
 	.hero {
 		padding-top: 5rem;
 	}
+
+	.footer-row {
+		flex-direction: column;
+	}
 }
 
 @media (max-width: 720px) {
@@ -780,6 +822,18 @@ pre {
 	.footer-row {
 		flex-direction: column;
 		align-items: flex-start;
+	}
+
+	.nav-links,
+	.footer-links {
+		width: 100%;
+		gap: 0.5rem;
+	}
+
+	.nav-links a,
+	.footer-links a {
+		padding-left: 0;
+		padding-right: 0;
 	}
 
 	.card-grid,
@@ -796,6 +850,48 @@ pre {
 
 	.hero-copy h1 {
 		max-width: none;
+		font-size: clamp(2.6rem, 13vw, 4rem);
+	}
+
+	.hero-copy p,
+	.docs-hero p {
+		font-size: 1rem;
+	}
+
+	.button-row {
+		width: 100%;
+	}
+
+	.button {
+		width: 100%;
+	}
+
+	.terminal-bar,
+	.terminal-line {
+		grid-template-columns: 1fr;
+	}
+
+	.terminal-bar {
+		display: grid;
+		justify-content: stretch;
+	}
+
+	.terminal-line {
+		gap: 0.45rem;
+	}
+
+	.terminal-line small,
+	.status-tag {
+		justify-self: start;
+	}
+
+	.metrics {
+		gap: 0.85rem;
+	}
+
+	.footer-link-groups {
+		grid-template-columns: 1fr;
+		gap: 1rem;
 	}
 
 	body {
@@ -804,5 +900,10 @@ pre {
 
 	.section {
 		padding-top: 1.5rem;
+	}
+
+	.docs-hero,
+	.hero {
+		padding-bottom: 1rem;
 	}
 }
