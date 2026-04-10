@@ -1,0 +1,257 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const concepts = [
+	{
+		title: 'Project',
+		description:
+			'A project is the top-level operating boundary in PollyPM. It groups repositories, goals, sessions, and operator checkpoints into one managed unit.',
+	},
+	{
+		title: 'Session',
+		description:
+			'A session is one managed execution lane. It has a task, a provider path, a health state, and an isolated place to do work.',
+	},
+	{
+		title: 'Worktree',
+		description:
+			'A worktree is the Git safety boundary for a session. It prevents parallel agents from colliding in the same checkout or branch.',
+	},
+	{
+		title: 'Provider Path',
+		description:
+			'A provider path is the model route a session is currently using. PollyPM can change that route when quotas or outages block progress.',
+	},
+	{
+		title: 'Operator',
+		description:
+			'The operator sets direction, watches health, and decides when to intervene, review, reroute, or shut work down.',
+	},
+	{
+		title: 'Handoff',
+		description:
+			'A handoff is the controlled transfer of work between a lane and an operator or between two execution paths without losing context.',
+	},
+];
+
+const architectureLayers = [
+	{
+		title: '1. Operator layer',
+		description:
+			'This is where human direction lives. Operators define scope, launch sessions, monitor health, and review output before merge or promotion.',
+	},
+	{
+		title: '2. Control layer',
+		description:
+			'PollyPM itself is the control plane. It tracks projects, sessions, worktrees, health state, provider routes, and intervention history.',
+	},
+	{
+		title: '3. Execution layer',
+		description:
+			'Execution happens inside managed sessions, typically backed by tmux. Each lane runs independently with a bounded task and known ownership.',
+	},
+	{
+		title: '4. Repository layer',
+		description:
+			'The repository layer is where output becomes normal Git work. PollyPM keeps changes separated so review and merging stay familiar.',
+	},
+];
+
+const lifecycle = [
+	{
+		title: 'Plan',
+		description: 'Define the project and break the work into lanes with clear file or task ownership.',
+	},
+	{
+		title: 'Launch',
+		description: 'Start sessions with a scoped task, a provider path, and an isolated worktree.',
+	},
+	{
+		title: 'Observe',
+		description: 'Use health and heartbeat signals to see which lanes are progressing, waiting, or failing.',
+	},
+	{
+		title: 'Intervene',
+		description: 'Reassign, fail over, or hand work back to an operator when a lane needs help.',
+	},
+	{
+		title: 'Review',
+		description: 'Treat the output as ordinary Git changes and evaluate it with the same engineering standards you already use.',
+	},
+	{
+		title: 'Promote',
+		description: 'Merge or ship the work once the lane has produced an acceptable result.',
+	},
+];
+
+const failureModes = [
+	{
+		title: 'Invisible session failure',
+		description:
+			'Without supervision, agents can stop progressing while the team assumes they are still working. PollyPM makes lane health visible.',
+	},
+	{
+		title: 'Shared checkout collisions',
+		description:
+			'Several agents editing the same working tree create avoidable merge pain. PollyPM uses worktrees to isolate changes.',
+	},
+	{
+		title: 'Provider dependency risk',
+		description:
+			'If one provider rate-limits or fails, execution stalls. PollyPM keeps provider routing explicit so work can move again.',
+	},
+	{
+		title: 'Lost operating context',
+		description:
+			'Teams often forget why a lane was launched or what happened during a run. PollyPM keeps projects and sessions organized around explicit tasks.',
+	},
+];
+---
+
+<Layout
+	title="Concepts and Architecture | PollyPM Docs"
+	description="Understand the core concepts, operating model, and architecture layers behind PollyPM."
+>
+	<div class="page-shell">
+		<header class="site-header">
+			<div class="container nav-row">
+				<a class="brand" href="/">
+					<span class="brand-mark"><span>PP</span></span>
+					<span class="brand-copy">
+						<small>PollyPM Docs</small>
+						<strong>Concepts and Architecture</strong>
+					</span>
+				</a>
+				<nav class="nav-links" aria-label="Documentation">
+					<a href="/">Home</a>
+					<a href="/docs/getting-started">Getting Started</a>
+					<a href="/#how-it-works">How It Works</a>
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			<section class="docs-hero">
+				<div class="container">
+					<span class="eyebrow">Documentation</span>
+					<h1>How PollyPM is organized.</h1>
+					<p>
+						PollyPM is not just a launcher for AI agents. It is a control layer that keeps projects,
+						sessions, worktrees, and operator actions connected so multi-agent execution stays
+						manageable.
+					</p>
+					<div class="docs-meta">
+						<span class="chip">Concepts</span>
+						<span class="chip">Architecture</span>
+						<span class="chip">Lifecycle</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="container">
+					<div class="section-heading">
+						<h2>Core concepts</h2>
+						<p>These are the main units PollyPM uses to turn several agent runs into one operable system.</p>
+					</div>
+					<div class="concept-grid">
+						{
+							concepts.map((concept) => (
+								<article class="doc-card">
+									<strong>{concept.title}</strong>
+									<p>{concept.description}</p>
+								</article>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="container split-grid">
+					<div class="info-panel">
+						<div class="section-heading">
+							<h2>Architecture layers</h2>
+							<p>PollyPM sits between human direction and raw agent execution.</p>
+						</div>
+						<ul>
+							{architectureLayers.map((item) => (
+								<li>
+									<strong>{item.title}</strong>
+									<p>{item.description}</p>
+								</li>
+							))}
+						</ul>
+					</div>
+
+					<div class="info-panel">
+						<div class="section-heading">
+							<h2>Execution lifecycle</h2>
+							<p>Most runs follow the same loop from planning to promotion.</p>
+						</div>
+						<ul class="timeline">
+							{lifecycle.map((item) => (
+								<li>
+									<strong>{item.title}</strong>
+									<span>{item.description}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="container">
+					<div class="section-heading">
+						<h2>What PollyPM is designed to prevent</h2>
+						<p>The value is not only more throughput. It is fewer coordination failures while agents are running.</p>
+					</div>
+					<div class="docs-grid">
+						{
+							failureModes.map((item) => (
+								<article class="doc-card">
+									<strong>{item.title}</strong>
+									<p>{item.description}</p>
+								</article>
+							))
+						}
+					</div>
+
+					<div class="cta-panel">
+						<div>
+							<h2>Read this page after getting started.</h2>
+							<p>
+								Use the getting started guide to launch PollyPM. Use this page to understand why the
+								project, session, and worktree model exists in the first place.
+							</p>
+						</div>
+						<div class="button-row">
+							<a class="button button-primary" href="/docs/getting-started">Open getting started</a>
+							<a class="button button-secondary" href="/">Back to homepage</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="container footer-row">
+				<div>
+					<a class="brand" href="/">
+						<span class="brand-mark"><span>PP</span></span>
+						<span class="brand-copy">
+							<small>PollyPM</small>
+							<strong>Concepts and architecture for multi-agent engineering</strong>
+						</span>
+					</a>
+				</div>
+				<nav class="footer-links" aria-label="Footer">
+					<a href="/">Home</a>
+					<a href="/docs/getting-started">Getting Started</a>
+					<a href="/#features">Capabilities</a>
+				</nav>
+			</div>
+		</footer>
+	</div>
+</Layout>
