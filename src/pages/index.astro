@@ -3,70 +3,67 @@ import Layout from '../layouts/Layout.astro';
 
 const features = [
 	{
-		title: 'Multi-agent orchestration',
+		title: 'Coordinate many agents',
 		description:
-			'Run Claude, Codex, and other agents as coordinated operators instead of isolated chat tabs. PollyPM keeps work moving across concurrent sessions with one control plane.',
+			'Run Claude, Codex, and other tools as one delivery system instead of a pile of disconnected chats and terminals.',
 	},
 	{
-		title: 'Heartbeat supervision',
+		title: 'See session health',
 		description:
-			'Automatic monitoring catches stalled sessions early, restarts unhealthy workers, and gives the operator a live picture of which agent is blocked, running, or ready to hand off.',
+			'Heartbeat monitoring makes stalled, healthy, and recovered lanes visible before work silently disappears.',
 	},
 	{
-		title: 'Provider failover',
+		title: 'Route around provider limits',
 		description:
-			'When one account, model, or provider hits a wall, PollyPM routes work to another path so the project does not wait on a single quota or outage window.',
+			'Move work to another provider or account when quotas, outages, or model availability interrupt execution.',
 	},
 	{
-		title: 'Worktree isolation',
+		title: 'Keep parallel changes clean',
 		description:
-			'Every stream of work can land in its own Git worktree, which makes parallel implementation safer, reviewable, and dramatically easier to merge back into the main branch.',
+			'Separate worktrees give each lane an isolated Git workspace so output stays reviewable and mergeable.',
 	},
 	{
-		title: 'Operator-grade CLI',
+		title: 'Operate from one CLI',
 		description:
-			'Use `pollypm` to launch, inspect, resume, and terminate agent sessions from one interface. No hidden browser state, no manual session archaeology.',
+			'Launch, monitor, hand off, and recover work from `pollypm` instead of reconstructing state from shell history.',
 	},
 	{
-		title: 'Cross-repo project tracking',
+		title: 'Track work across repos',
 		description:
-			'Keep epics, execution state, and agent assignments visible even when delivery spans multiple repositories, service boundaries, or independent worktrees.',
+			'Keep project-level visibility even when the delivery path spans several repositories, services, or branches.',
 	},
 ];
 
 const workflow = [
 	{
-		title: 'Brief the PM layer once',
+		title: 'Define the project',
 		description:
-			'Define the project, the repositories involved, and the outcome you want. PollyPM turns that into an operating plan that can be delegated to specialized agents.',
+			'Describe the job, register the repositories involved, and decide which lanes need to run in parallel.',
 	},
 	{
-		title: 'Launch isolated execution lanes',
+		title: 'Launch managed lanes',
 		description:
-			'Agents start inside managed tmux sessions with dedicated worktrees, known roles, and a clean task boundary. Each lane can progress independently without stomping on another.',
+			'PollyPM starts agent sessions inside tmux with scoped tasks, known ownership, and isolated worktrees.',
 	},
 	{
-		title: 'Monitor, recover, and redirect',
+		title: 'Monitor and intervene',
 		description:
-			'Heartbeats, health checks, and failover logic keep the system resilient. Operators can step in, reassign work, or promote output without losing the execution trail.',
+			'Operators can watch health, fail over providers, hand work back for review, and keep the project moving.',
 	},
 ];
 
 const docCards = [
 	{
-		title: 'Install and launch',
-		description:
-			'Bring PollyPM online, point it at your repos, and start the first managed session in a few commands.',
+		title: 'Getting Started',
+		description: 'Install PollyPM, configure providers, and launch a real first project.',
 	},
 	{
-		title: 'Model your operating flow',
-		description:
-			'Learn the core abstractions: projects, sessions, worktrees, providers, and operator checkpoints.',
+		title: 'Operating Model',
+		description: 'Understand projects, sessions, worktrees, provider paths, and operator checkpoints.',
 	},
 	{
-		title: 'Run the system in production',
-		description:
-			'Use monitoring, failover, and handoff patterns to keep agent execution reliable over long-running projects.',
+		title: 'Day-One Operations',
+		description: 'Learn the monitor, handoff, and recovery loop that keeps long-running agent work stable.',
 	},
 ];
 ---
@@ -98,30 +95,30 @@ const docCards = [
 			<section class="hero">
 				<div class="container hero-grid">
 					<div class="hero-copy">
-						<span class="eyebrow">Built for developers running more than one agent</span>
-						<h1>AI agents ship faster when someone is actually managing them.</h1>
+						<span class="eyebrow">AI project management for engineering teams</span>
+						<h1>PollyPM is the control plane for multi-agent software delivery.</h1>
 						<p>
-							PollyPM is the PM layer for AI-assisted engineering teams. It orchestrates Claude,
-							Codex, and other agents across repositories, keeps them alive with heartbeat
-							supervision, isolates parallel work in dedicated worktrees, and gives operators one
-							CLI to manage the whole system.
+							When teams start using several AI agents at once, the failure mode is not model quality.
+							It is coordination. PollyPM gives you one place to launch work, monitor session health,
+							isolate Git changes, reroute around provider failures, and keep the whole project
+							operable.
 						</p>
 						<div class="button-row">
-							<a class="button button-primary" href="/docs/getting-started">Read Getting Started</a>
-							<a class="button button-secondary" href="#how-it-works">See the operating model</a>
+							<a class="button button-primary" href="/docs/getting-started">Read getting started</a>
+							<a class="button button-secondary" href="#how-it-works">See how it works</a>
 						</div>
 						<div class="hero-notes" aria-label="Product highlights">
-							<span class="chip">tmux-managed sessions</span>
-							<span class="chip">automatic health monitoring</span>
-							<span class="chip">provider and account failover</span>
-							<span class="chip">safe parallel development</span>
+							<span class="chip">tmux-backed sessions</span>
+							<span class="chip">heartbeat supervision</span>
+							<span class="chip">provider failover</span>
+							<span class="chip">isolated worktrees</span>
 						</div>
 					</div>
 
 					<div class="hero-panel">
 						<div class="panel-header">
-							<span class="status-pill">Operator console live</span>
-							<span>Unified CLI view</span>
+							<span class="status-pill">Live</span>
+							<span>pollypm monitor</span>
 						</div>
 						<div class="terminal-card">
 							<div class="terminal-bar">
@@ -135,17 +132,17 @@ const docCards = [
 							<div class="terminal-output">
 								<div class="terminal-line">
 									<small>frontend-refresh</small>
-									<code><span class="provider">codex</span> implementing landing page in isolated worktree</code>
+									<code><span class="provider">codex</span> landing page in isolated worktree</code>
 									<span class="status-tag">healthy</span>
 								</div>
 								<div class="terminal-line">
 									<small>docs-pass</small>
-									<code><span class="provider">claude</span> drafting migration guide and rollout notes</code>
+									<code><span class="provider">claude</span> docs pass and rollout notes</code>
 									<span class="status-tag">healthy</span>
 								</div>
 								<div class="terminal-line">
 									<small>api-followup</small>
-									<code><span class="provider">fallback</span> reassigned after provider quota exhaustion</code>
+									<code><span class="provider">fallback</span> reassigned after quota hit</code>
 									<span class="status-tag">recovered</span>
 								</div>
 							</div>
@@ -154,15 +151,15 @@ const docCards = [
 						<div class="metrics">
 							<div class="metric">
 								<span>1 CLI</span>
-								<p>to launch, supervise, and audit every managed session.</p>
+								<p>to launch, monitor, and recover every managed lane</p>
 							</div>
 							<div class="metric">
 								<span>N agents</span>
-								<p>running in parallel without losing session state or branch hygiene.</p>
+								<p>running in parallel without sharing a working directory</p>
 							</div>
 							<div class="metric">
 								<span>24/7</span>
-								<p>health awareness through heartbeats, checks, and intervention points.</p>
+								<p>visibility into health, stalls, and intervention points</p>
 							</div>
 						</div>
 					</div>
@@ -172,11 +169,10 @@ const docCards = [
 			<section class="section" id="features">
 				<div class="container">
 					<div class="section-heading">
-						<h2>Built for teams that need more than a prompt box.</h2>
+						<h2>What PollyPM is for</h2>
 						<p>
-							PollyPM turns AI usage into a managed delivery system. The goal is not just to talk
-							to better models. The goal is to keep parallel execution reliable, inspectable, and
-							aligned with how software teams already work.
+							PollyPM is for teams that already know AI agents can produce useful work, but need
+							that work to stay organized, inspectable, and safe to run in parallel.
 						</p>
 					</div>
 
@@ -196,11 +192,10 @@ const docCards = [
 			<section class="section" id="how-it-works">
 				<div class="container">
 					<div class="section-heading">
-						<h2>How PollyPM keeps multi-agent work under control.</h2>
+						<h2>How PollyPM keeps agent work under control</h2>
 						<p>
-							The system combines project management discipline with infrastructure-level execution
-							control. Operators set direction once, then PollyPM manages the mechanics that usually
-							break when teams try to scale agent workflows manually.
+							The model is simple: define the project once, let lanes execute independently, and
+							give operators the controls they need when something drifts or stalls.
 						</p>
 					</div>
 
@@ -219,33 +214,33 @@ const docCards = [
 					<div class="split-grid">
 						<div class="info-panel">
 							<div class="section-heading">
-								<h2>What operators actually gain</h2>
+								<h2>Why teams use it</h2>
 								<p>
-									Instead of managing agent work through memory and scattered terminals, the PM
-									layer makes execution state explicit.
+									PollyPM adds the missing management layer between a good model and a reliable
+									delivery process.
 								</p>
 							</div>
 							<ul>
-								<li>See which sessions are active, stalled, unhealthy, or ready for review.</li>
-								<li>Switch providers or accounts without rebuilding the workflow from scratch.</li>
-								<li>Track progress across several repositories from one project-level view.</li>
-								<li>Preserve safe branch boundaries while still moving multiple tasks in parallel.</li>
+								<li>Know which sessions are healthy, stalled, recovered, or ready for review.</li>
+								<li>Keep multiple tasks moving without merging unrelated output into one branch.</li>
+								<li>Swap providers or accounts without rebuilding the whole operating flow.</li>
+								<li>Review AI output as normal Git work instead of opaque terminal state.</li>
 							</ul>
 						</div>
 
 						<div class="info-panel">
 							<div class="section-heading">
-								<h2>What teams stop doing</h2>
+								<h2>What it replaces</h2>
 								<p>
-									Manual coordination overhead is where most multi-agent setups collapse. PollyPM
-									reduces the brittle parts.
+									Most multi-agent setups fail because coordination stays manual. PollyPM removes
+									the brittle parts.
 								</p>
 							</div>
 							<ul>
-								<li>Babysitting long-running sessions to see whether a model silently stopped.</li>
-								<li>Hand-merging unrelated agent output from a single shared working directory.</li>
-								<li>Restarting execution manually every time one provider rate-limits the project.</li>
-								<li>Reconstructing what happened after the fact from shell history and guesswork.</li>
+								<li>No browser-tab babysitting to see whether a long run silently died.</li>
+								<li>No shared working directory where several agents overwrite each other.</li>
+								<li>No guesswork about which provider path a lane is currently using.</li>
+								<li>No reconstructing project history from shell logs and memory.</li>
 							</ul>
 						</div>
 					</div>
@@ -255,10 +250,10 @@ const docCards = [
 			<section class="section" id="docs">
 				<div class="container">
 					<div class="section-heading">
-						<h2>Documentation that starts from operating reality.</h2>
+						<h2>Start with the operating model</h2>
 						<p>
-							PollyPM docs are written for the people actually running the system: staff engineers,
-							tooling teams, and operators who need their AI workflows to stay stable under load.
+							The docs are written for operators and engineers who need to make agent execution work
+							reliably in a real repository, not just in a demo.
 						</p>
 					</div>
 
@@ -275,11 +270,10 @@ const docCards = [
 
 					<div class="cta-panel">
 						<div>
-							<h2>Start with the CLI, then scale into a managed multi-agent system.</h2>
+							<h2>PollyPM is what teams add after “just use more agents” stops being enough.</h2>
 							<p>
-								The fastest way to understand PollyPM is to see how projects, sessions, worktrees,
-								and operator checkpoints fit together. The getting started guide walks through that
-								model directly.
+								If you need multi-agent work to be observable, recoverable, and safe to merge,
+								start with the CLI and build from there.
 							</p>
 						</div>
 						<div class="button-row">
@@ -298,11 +292,12 @@ const docCards = [
 						<span class="brand-mark"><span>PP</span></span>
 						<span class="brand-copy">
 							<small>PollyPM</small>
-							<strong>AI project management for agentic delivery</strong>
+							<strong>AI project management for multi-agent engineering</strong>
 						</span>
 					</a>
 					<p>
-						Coordinate AI agents like a real software program, not a collection of browser tabs.
+						Coordinate AI agents like a software delivery system, not a loose collection of tabs,
+						terminals, and half-finished branches.
 					</p>
 				</div>
 				<nav class="footer-links" aria-label="Footer">
