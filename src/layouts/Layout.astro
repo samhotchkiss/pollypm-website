@@ -13,7 +13,8 @@ const {
 
 const site = Astro.site ?? new URL('https://pollypm.com');
 const canonicalUrl = new URL(Astro.url.pathname, site);
-const socialImage = new URL('/favicon.svg', site);
+const socialImage = new URL('/social-card.png', site);
+const socialImageAlt = 'PollyPM social preview card showing the product brand and a monitored multi-agent workflow.';
 const structuredData = JSON.stringify({
 	'@context': 'https://schema.org',
 	'@graph': [
@@ -71,11 +72,15 @@ const structuredData = JSON.stringify({
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:image" content={socialImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={socialImageAlt} />
 		<meta name="theme-color" content="#07111f" />
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={socialImage} />
+		<meta name="twitter:image:alt" content={socialImageAlt} />
 		<script type="application/ld+json" set:html={structuredData}></script>
 		<title>{title}</title>
 	</head>

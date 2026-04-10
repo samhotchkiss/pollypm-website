@@ -1,0 +1,73 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="92" y1="48" x2="1091" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A1423"/>
+      <stop offset="0.52" stop-color="#07111F"/>
+      <stop offset="1" stop-color="#0B182C"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(277 118) rotate(52.7694) scale(281.862 414.674)">
+      <stop stop-color="#68E1C7" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#68E1C7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(930 160) rotate(116.357) scale(244.218 274.269)">
+      <stop stop-color="#FFB86B" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#FFB86B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panel" x1="710" y1="148" x2="1016" y2="516" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#17304D"/>
+      <stop offset="1" stop-color="#0C1C2F"/>
+    </linearGradient>
+    <linearGradient id="badge" x1="0" y1="0" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#86F2DD"/>
+      <stop offset="1" stop-color="#3DBFA8"/>
+    </linearGradient>
+    <filter id="blur" x="-50" y="-50" width="1300" height="730" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="36" fill="url(#bg)"/>
+  <g filter="url(#blur)">
+    <circle cx="270" cy="132" r="140" fill="url(#glowA)"/>
+    <circle cx="937" cy="163" r="122" fill="url(#glowB)"/>
+  </g>
+
+  <rect x="62" y="56" width="1076" height="518" rx="30" fill="rgba(11,24,40,0.56)" stroke="rgba(153,182,222,0.12)"/>
+
+  <rect x="102" y="104" width="94" height="94" rx="24" fill="url(#badge)"/>
+  <text x="149" y="164" text-anchor="middle" fill="#05261F" font-family="Space Grotesk, Arial, sans-serif" font-size="38" font-weight="700">PP</text>
+
+  <text x="102" y="246" fill="#BFD0E7" font-family="Manrope, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="0.22em">AI PROJECT MANAGEMENT</text>
+  <text x="102" y="324" fill="#F7FBFF" font-family="Space Grotesk, Arial, sans-serif" font-size="62" font-weight="700">
+    <tspan x="102" dy="0">The control plane for</tspan>
+    <tspan x="102" dy="70">multi-agent software delivery.</tspan>
+  </text>
+
+  <text x="102" y="454" fill="#BFD0E7" font-family="Manrope, Arial, sans-serif" font-size="28" font-weight="500">
+    <tspan x="102" dy="0">Launch work, monitor health, isolate Git changes,</tspan>
+    <tspan x="102" dy="42">and reroute around provider failures.</tspan>
+  </text>
+
+  <rect x="732" y="136" width="348" height="334" rx="28" fill="url(#panel)" stroke="rgba(153,182,222,0.18)"/>
+  <text x="760" y="182" fill="#BFD0E7" font-family="Manrope, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="0.12em">POLLYPM MONITOR</text>
+
+  <rect x="760" y="216" width="292" height="72" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(153,182,222,0.08)"/>
+  <text x="780" y="243" fill="#99ABC6" font-family="Manrope, Arial, sans-serif" font-size="15">frontend-refresh</text>
+  <text x="780" y="268" fill="#ECF3FF" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">codex  landing page in isolated worktree</text>
+  <rect x="970" y="236" width="64" height="24" rx="12" fill="rgba(104,225,199,0.12)"/>
+  <text x="1002" y="252" text-anchor="middle" fill="#B6FFF0" font-family="Manrope, Arial, sans-serif" font-size="12" font-weight="700">healthy</text>
+
+  <rect x="760" y="302" width="292" height="72" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(153,182,222,0.08)"/>
+  <text x="780" y="329" fill="#99ABC6" font-family="Manrope, Arial, sans-serif" font-size="15">docs-pass</text>
+  <text x="780" y="354" fill="#ECF3FF" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">claude  docs pass and rollout notes</text>
+  <rect x="970" y="322" width="64" height="24" rx="12" fill="rgba(104,225,199,0.12)"/>
+  <text x="1002" y="338" text-anchor="middle" fill="#B6FFF0" font-family="Manrope, Arial, sans-serif" font-size="12" font-weight="700">healthy</text>
+
+  <rect x="760" y="388" width="292" height="72" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(153,182,222,0.08)"/>
+  <text x="780" y="415" fill="#99ABC6" font-family="Manrope, Arial, sans-serif" font-size="15">api-followup</text>
+  <text x="780" y="440" fill="#ECF3FF" font-family="Manrope, Arial, sans-serif" font-size="17" font-weight="600">fallback  reassigned after quota hit</text>
+  <rect x="958" y="408" width="76" height="24" rx="12" fill="rgba(255,184,107,0.14)"/>
+  <text x="996" y="424" text-anchor="middle" fill="#FFD09B" font-family="Manrope, Arial, sans-serif" font-size="12" font-weight="700">recovered</text>
+
+  <text x="102" y="540" fill="#68E1C7" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="700">pollypm.com</text>
+</svg>
