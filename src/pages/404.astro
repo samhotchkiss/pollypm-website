@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="404 | PollyPM"
+	description="The page you requested does not exist on PollyPM. Return to the home page or continue with the getting started docs."
+>
+	<div class="page-shell">
+		<header class="site-header">
+			<div class="container nav-row">
+				<a class="brand" href="/">
+					<span class="brand-mark"><span>PP</span></span>
+					<span class="brand-copy">
+						<small>PollyPM</small>
+						<strong>Page Not Found</strong>
+					</span>
+				</a>
+				<nav class="nav-links" aria-label="Primary">
+					<a href="/">Home</a>
+					<a href="/#features">Features</a>
+					<a href="/docs/getting-started">Getting Started</a>
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			<section class="docs-hero">
+				<div class="container">
+					<span class="eyebrow">404 error</span>
+					<h1>This route is empty.</h1>
+					<p>The page may have moved, or the URL is wrong. Use the links below to continue.</p>
+					<div class="button-row">
+						<a class="button button-primary" href="/">Go home</a>
+						<a class="button button-secondary" href="/docs/getting-started">Open docs</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="section">
+				<div class="container split-grid">
+					<div class="info-panel">
+						<div class="section-heading">
+							<h2>Common next steps</h2>
+						</div>
+						<ul>
+							<li>Return to the marketing homepage.</li>
+							<li>Open the getting started guide.</li>
+							<li>Review PollyPM capabilities.</li>
+						</ul>
+					</div>
+
+					<div class="cta-panel">
+						<div>
+							<h2>Start from a known route.</h2>
+							<p>Use the docs if you want setup instructions, or the home page if you want the product overview.</p>
+						</div>
+						<div class="button-row">
+							<a class="button button-primary" href="/">Home</a>
+							<a class="button button-secondary" href="/docs/getting-started">Getting Started</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+</Layout>
