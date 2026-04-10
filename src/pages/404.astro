@@ -24,7 +24,7 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</header>
 
-		<main>
+		<main id="main-content">
 			<section class="docs-hero">
 				<div class="container">
 					<span class="eyebrow">404 error</span>
@@ -63,5 +63,33 @@ import Layout from '../layouts/Layout.astro';
 				</div>
 			</section>
 		</main>
+
+		<footer class="site-footer">
+			<div class="container footer-row">
+				<div class="footer-brand-block">
+					<a class="brand" href="/">
+						<span class="brand-mark"><span>PP</span></span>
+						<span class="brand-copy">
+							<small>PollyPM</small>
+							<strong>Operator-facing docs for multi-agent engineering</strong>
+						</span>
+					</a>
+				</div>
+				<div class="footer-link-groups">
+					<nav class="footer-nav-group" aria-label="Site">
+						<strong>Site</strong>
+						<a href="/">Home</a>
+						<a href="/#features">Features</a>
+						<a href="/#how-it-works">How it works</a>
+					</nav>
+					<nav class="footer-nav-group" aria-label="Docs">
+						<strong>Docs</strong>
+						<a href="/docs">Docs home</a>
+						<a href="/docs/getting-started">Getting Started</a>
+						<a href="/docs/faq">FAQ</a>
+					</nav>
+				</div>
+			</div>
+		</footer>
 	</div>
 </Layout>

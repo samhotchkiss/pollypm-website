@@ -53,6 +53,25 @@ a {
 	color: inherit;
 }
 
+.skip-link {
+	position: absolute;
+	top: 0.75rem;
+	left: 1rem;
+	z-index: 100;
+	padding: 0.8rem 1rem;
+	border-radius: 14px;
+	background: var(--text-strong);
+	color: var(--bg);
+	font-weight: 800;
+	text-decoration: none;
+	transform: translateY(-160%);
+	transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+	transform: translateY(0);
+}
+
 ::selection {
 	background: rgba(104, 225, 199, 0.22);
 	color: var(--text-strong);
@@ -526,6 +545,23 @@ pre {
 	box-shadow: 0 20px 44px rgba(3, 10, 20, 0.34);
 }
 
+.doc-link-card:focus-visible,
+.button:focus-visible,
+.nav-links a:focus-visible,
+.footer-links a:focus-visible,
+.footer-nav-group a:focus-visible,
+.brand:focus-visible {
+	outline: 2px solid rgba(104, 225, 199, 0.9);
+	outline-offset: 4px;
+}
+
+.doc-link-card:focus-visible {
+	transform: translateY(-3px);
+	border-color: rgba(153, 182, 222, 0.3);
+	background: rgba(18, 34, 55, 0.94);
+	box-shadow: 0 20px 44px rgba(3, 10, 20, 0.34);
+}
+
 .metric strong,
 .section-heading strong,
 .step strong,
@@ -905,5 +941,28 @@ pre {
 	.docs-hero,
 	.hero {
 		padding-bottom: 1rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		transition-delay: 0ms !important;
+	}
+
+	.button:hover,
+	.card:hover,
+	.step:hover,
+	.doc-card:hover,
+	.doc-link-card:focus-visible {
+		transform: none;
 	}
 }
