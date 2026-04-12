@@ -4,6 +4,18 @@
     <loc>https://pollypm.com/</loc>
   </url>
   <url>
+    <loc>https://pollypm.com/docs/</loc>
+  </url>
+  <url>
     <loc>https://pollypm.com/docs/getting-started/</loc>
+  </url>
+  <url>
+    <loc>https://pollypm.com/docs/concepts/</loc>
+  </url>
+  <url>
+    <loc>https://pollypm.com/docs/cli-reference/</loc>
+  </url>
+  <url>
+    <loc>https://pollypm.com/docs/faq/</loc>
   </url>
 </urlset>

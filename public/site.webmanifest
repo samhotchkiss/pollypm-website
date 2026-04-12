@@ -1,8 +1,12 @@
 {
+  "id": "/",
   "name": "PollyPM",
   "short_name": "PollyPM",
+  "description": "AI project management for multi-agent engineering teams.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#07111f",
   "theme_color": "#07111f",
   "icons": [

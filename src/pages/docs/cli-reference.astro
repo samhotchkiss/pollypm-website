@@ -132,8 +132,10 @@ const commonIssues = [
 				</a>
 				<nav class="nav-links" aria-label="Documentation">
 					<a href="/">Home</a>
+					<a href="/docs">Docs</a>
 					<a href="/docs/getting-started">Getting Started</a>
 					<a href="/docs/concepts">Concepts</a>
+					<a href="/docs/cli-reference" aria-current="page">CLI Reference</a>
 					<a href="/docs/faq">FAQ</a>
 				</nav>
 			</div>
@@ -250,7 +252,7 @@ const commonIssues = [
 
 		<footer class="site-footer">
 			<div class="container footer-row">
-				<div>
+				<div class="footer-brand-block">
 					<a class="brand" href="/">
 						<span class="brand-mark"><span>PP</span></span>
 						<span class="brand-copy">
@@ -259,12 +261,22 @@ const commonIssues = [
 						</span>
 					</a>
 				</div>
-				<nav class="footer-links" aria-label="Footer">
-					<a href="/">Home</a>
-					<a href="/docs/getting-started">Getting Started</a>
-					<a href="/docs/concepts">Concepts</a>
-					<a href="/docs/faq">FAQ</a>
-				</nav>
+				<div class="footer-link-groups">
+					<nav class="footer-nav-group" aria-label="Docs">
+						<strong>Docs</strong>
+						<a href="/docs">Docs home</a>
+						<a href="/docs/getting-started">Getting Started</a>
+						<a href="/docs/concepts">Concepts</a>
+						<a href="/docs/cli-reference" aria-current="page">CLI Reference</a>
+						<a href="/docs/faq">FAQ</a>
+					</nav>
+					<nav class="footer-nav-group" aria-label="Site">
+						<strong>Site</strong>
+						<a href="/">Home</a>
+						<a href="/#features">Features</a>
+						<a href="/#how-it-works">How it works</a>
+					</nav>
+				</div>
 			</div>
 		</footer>
 	</div>

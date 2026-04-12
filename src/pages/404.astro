@@ -4,7 +4,8 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
 	title="404 | PollyPM"
-	description="The page you requested does not exist on PollyPM. Return to the home page or continue with the getting started docs."
+	description="The page you requested does not exist on PollyPM. Return to the home page or continue with the documentation hub."
+	noindex={true}
 >
 	<div class="page-shell">
 		<header class="site-header">
@@ -18,8 +19,9 @@ import Layout from '../layouts/Layout.astro';
 				</a>
 				<nav class="nav-links" aria-label="Primary">
 					<a href="/">Home</a>
-					<a href="/#features">Features</a>
+					<a href="/docs">Docs</a>
 					<a href="/docs/getting-started">Getting Started</a>
+					<a href="/docs/faq">FAQ</a>
 				</nav>
 			</div>
 		</header>
@@ -29,10 +31,10 @@ import Layout from '../layouts/Layout.astro';
 				<div class="container">
 					<span class="eyebrow">404 error</span>
 					<h1>This route is empty.</h1>
-					<p>The page may have moved, or the URL is wrong. Use the links below to continue.</p>
+					<p>The page may have moved, or the URL is wrong. Use the links below to jump back into the site.</p>
 					<div class="button-row">
 						<a class="button button-primary" href="/">Go home</a>
-						<a class="button button-secondary" href="/docs/getting-started">Open docs</a>
+						<a class="button button-secondary" href="/docs">Open docs</a>
 					</div>
 				</div>
 			</section>
@@ -45,19 +47,19 @@ import Layout from '../layouts/Layout.astro';
 						</div>
 						<ul>
 							<li>Return to the marketing homepage.</li>
-							<li>Open the getting started guide.</li>
-							<li>Review PollyPM capabilities.</li>
+							<li>Open the docs overview and choose the right guide.</li>
+							<li>Jump to getting started, concepts, or FAQ.</li>
 						</ul>
 					</div>
 
 					<div class="cta-panel">
 						<div>
 							<h2>Start from a known route.</h2>
-							<p>Use the docs if you want setup instructions, or the home page if you want the product overview.</p>
+							<p>Use the docs if you want setup or architecture guidance, or the home page if you want the product overview.</p>
 						</div>
 						<div class="button-row">
 							<a class="button button-primary" href="/">Home</a>
-							<a class="button button-secondary" href="/docs/getting-started">Getting Started</a>
+							<a class="button button-secondary" href="/docs">Docs home</a>
 						</div>
 					</div>
 				</div>
@@ -86,6 +88,8 @@ import Layout from '../layouts/Layout.astro';
 						<strong>Docs</strong>
 						<a href="/docs">Docs home</a>
 						<a href="/docs/getting-started">Getting Started</a>
+						<a href="/docs/concepts">Concepts</a>
+						<a href="/docs/cli-reference">CLI Reference</a>
 						<a href="/docs/faq">FAQ</a>
 					</nav>
 				</div>

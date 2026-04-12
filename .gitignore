@@ -4,3 +4,5 @@ dist/
 .astro/
 .vscode/
 .DS_Store
+
+.pollypm-state/

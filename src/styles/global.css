@@ -226,6 +226,13 @@ pre {
 	background: rgba(255, 255, 255, 0.04);
 }
 
+.nav-links a[aria-current='page'],
+.footer-links a[aria-current='page'] {
+	color: var(--text-strong);
+	background: rgba(104, 225, 199, 0.1);
+	border: 1px solid rgba(104, 225, 199, 0.22);
+}
+
 .button-row {
 	display: flex;
 	flex-wrap: wrap;
@@ -818,6 +825,10 @@ pre {
 
 .footer-nav-group a:hover {
 	color: var(--text);
+}
+
+.footer-nav-group a[aria-current='page'] {
+	color: var(--text-strong);
 }
 
 @media (max-width: 960px) {

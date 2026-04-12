@@ -6,12 +6,34 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "preinstall": "node scripts/check-node-version.mjs",
+    "predev": "node scripts/check-node-version.mjs",
+    "prebuild": "node scripts/check-node-version.mjs",
+    "precheck": "node scripts/check-node-version.mjs",
+    "prepreview": "node scripts/check-node-version.mjs",
+    "preastro": "node scripts/check-node-version.mjs",
     "dev": "astro dev",
-    "build": "astro build && node scripts/make-file-openable.mjs",
+    "dev:node22": "node scripts/run-with-homebrew-node22.mjs npm run dev",
+    "build": "astro build && node scripts/make-file-openable.mjs && npm run check:dist-links",
+    "build:node22": "node scripts/run-with-homebrew-node22.mjs npm run build",
+    "check": "npm run build && npm run astro -- check",
+    "check:node22": "node scripts/run-with-homebrew-node22.mjs npm run check",
+    "check:dist-links": "node scripts/check-dist-links.mjs",
     "preview": "astro preview",
-    "astro": "astro"
+    "preview:node22": "node scripts/run-with-homebrew-node22.mjs npm run preview",
+    "astro": "astro",
+    "astro:node22": "node scripts/run-with-homebrew-node22.mjs npm run astro --"
   },
   "dependencies": {
     "astro": "^6.1.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "yaml-language-server": {
+      "yaml": "^2.8.3"
+    }
   }
 }
