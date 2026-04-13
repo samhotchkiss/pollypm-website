@@ -1,5 +1,5 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import DocsFrame from '../../components/DocsFrame.astro';
 
 const faqs = [
 	{
@@ -48,112 +48,165 @@ const faqs = [
 			'No. PollyPM is there to manage execution and coordination. Operators still decide task boundaries, review code, and make shipping decisions.',
 	},
 ];
+
+const quickRoutes = [
+	{
+		label: 'Ready to install',
+		title: 'Start with onboarding',
+		description: 'Go straight to the first-run guide if you already understand the value proposition and need the operator workflow.',
+		href: '/docs/getting-started',
+	},
+	{
+		label: 'Still evaluating',
+		title: 'Read concepts next',
+		description: 'Use the architecture page if you need to understand the model behind sessions, worktrees, and operator checkpoints.',
+		href: '/docs/concepts',
+	},
+	{
+		label: 'Need commands',
+		title: 'Open CLI reference',
+		description: 'Jump to the command and config surface when the pilot is already active and you need practical examples.',
+		href: '/docs/cli-reference',
+	},
+];
 ---
 
-<Layout
+<DocsFrame
 	title="FAQ | PollyPM Docs"
 	description="Frequently asked questions about PollyPM, its operating model, and how to roll it out."
+	heroTitle="Common PollyPM questions."
+	heroSummary="This page answers the practical questions teams usually ask when they are deciding whether PollyPM fits their workflow or when they are setting up the first pilot."
+	currentPath="/docs/faq"
+	pills={['FAQ', 'Rollout', 'Operations']}
 >
-	<div class="page-shell">
-		<header class="site-header">
-			<div class="container nav-row">
-				<a class="brand" href="/">
-					<span class="brand-mark"><span>PP</span></span>
-					<span class="brand-copy">
-						<small>PollyPM Docs</small>
-						<strong>FAQ</strong>
-					</span>
-				</a>
-				<nav class="nav-links" aria-label="Documentation">
-					<a href="/">Home</a>
-					<a href="/docs">Docs</a>
-					<a href="/docs/getting-started">Getting Started</a>
-					<a href="/docs/concepts">Concepts</a>
-					<a href="/docs/cli-reference">CLI Reference</a>
-					<a href="/docs/faq" aria-current="page">FAQ</a>
-				</nav>
+	<section class="docs-section">
+		<div class="docs-section-head">
+			<span class="docs-eyebrow">FAQ</span>
+			<h2>Start here if you want the short version before diving deeper.</h2>
+			<p class="docs-section-copy">These are the practical questions teams ask when they are evaluating the model or planning a first rollout.</p>
+		</div>
+
+		<div class="faq-spotlight">
+			<div class="faq-spotlight-copy">
+				<span class="docs-card-label">Fast orientation</span>
+				<strong>The short answer: PollyPM makes multi-agent work operable.</strong>
+				<p>Most teams do not need more raw agent output. They need better coordination, clearer health signals, safer Git boundaries, and a way to recover when a lane drifts.</p>
 			</div>
-		</header>
 
-		<main id="main-content">
-			<section class="docs-hero">
-				<div class="container">
-					<span class="eyebrow">Documentation</span>
-					<h1>Common PollyPM questions.</h1>
-					<p>
-						This page answers the practical questions teams usually ask when they are deciding
-						whether PollyPM fits their workflow or when they are setting up the first pilot.
-					</p>
-					<div class="docs-meta">
-						<span class="chip">FAQ</span>
-						<span class="chip">Rollout</span>
-						<span class="chip">Operations</span>
-					</div>
-				</div>
-			</section>
-
-			<section class="section">
-				<div class="container">
-					<div class="section-heading">
-						<h2>Frequently asked questions</h2>
-						<p>Start here if you want the short version before diving deeper into the rest of the docs.</p>
-					</div>
-					<div class="docs-grid">
-						{
-							faqs.map((item) => (
-								<article class="doc-card">
-									<strong>{item.question}</strong>
-									<p>{item.answer}</p>
-								</article>
-							))
-						}
-					</div>
-
-					<div class="cta-panel">
-						<div>
-							<h2>Read the FAQ, then choose the right next page.</h2>
-							<p>
-								If you are still evaluating the model, read concepts next. If you are ready to run
-								the tool, go straight to getting started or the CLI reference.
-							</p>
-						</div>
-						<div class="button-row">
-							<a class="button button-primary" href="/docs/getting-started">Open getting started</a>
-							<a class="button button-secondary" href="/docs/concepts">Read concepts</a>
-						</div>
-					</div>
-				</div>
-			</section>
-		</main>
-
-		<footer class="site-footer">
-			<div class="container footer-row">
-				<div class="footer-brand-block">
-					<a class="brand" href="/">
-						<span class="brand-mark"><span>PP</span></span>
-						<span class="brand-copy">
-							<small>PollyPM</small>
-							<strong>FAQ for multi-agent engineering operations</strong>
-						</span>
-					</a>
-				</div>
-				<div class="footer-link-groups">
-					<nav class="footer-nav-group" aria-label="Docs">
-						<strong>Docs</strong>
-						<a href="/docs">Docs home</a>
-						<a href="/docs/getting-started">Getting Started</a>
-						<a href="/docs/concepts">Concepts</a>
-						<a href="/docs/cli-reference">CLI Reference</a>
-						<a href="/docs/faq" aria-current="page">FAQ</a>
-					</nav>
-					<nav class="footer-nav-group" aria-label="Site">
-						<strong>Site</strong>
-						<a href="/">Home</a>
-						<a href="/#features">Features</a>
-						<a href="/#how-it-works">How it works</a>
-					</nav>
-				</div>
+			<div class="faq-route-grid">
+				{
+					quickRoutes.map((route) => (
+						<a class="docs-card docs-card-link faq-route-card" href={route.href}>
+							<span class="docs-card-label">{route.label}</span>
+							<strong>{route.title}</strong>
+							<p>{route.description}</p>
+						</a>
+					))
+				}
 			</div>
-		</footer>
-	</div>
-</Layout>
+		</div>
+	</section>
+
+	<section class="docs-section">
+		<div class="docs-section-head">
+			<span class="docs-eyebrow">Questions</span>
+			<h2>The practical questions teams usually ask first.</h2>
+		</div>
+
+		<div class="docs-grid two-up faq-grid">
+			{
+				faqs.map((item, index) => (
+					<article class="docs-card faq-card">
+						<span class="docs-card-label">Question {index + 1}</span>
+						<strong>{item.question}</strong>
+						<p>{item.answer}</p>
+					</article>
+				))
+			}
+		</div>
+
+		<div class="docs-cta">
+			<div>
+				<span class="docs-card-label">Next page</span>
+				<strong>Read the FAQ, then choose the right next doc.</strong>
+				<p class="docs-section-copy">If you are still evaluating the model, read concepts next. If you are ready to run the tool, go straight to getting started or the CLI reference.</p>
+			</div>
+
+			<div class="docs-actions">
+				<a class="docs-button primary" href="/docs/getting-started">Open getting started</a>
+				<a class="docs-button secondary" href="/docs/concepts">Read concepts</a>
+			</div>
+		</div>
+	</section>
+</DocsFrame>
+
+<style>
+	.faq-spotlight {
+		display: grid;
+		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+		gap: 1rem;
+	}
+
+	.faq-spotlight-copy,
+	.faq-route-grid,
+	.faq-card {
+		position: relative;
+	}
+
+	.faq-spotlight-copy {
+		padding: 1.3rem;
+		border-radius: 30px;
+		border: 1px solid rgba(255, 255, 255, 0.09);
+		background:
+			radial-gradient(circle at top right, rgba(255, 131, 87, 0.14), transparent 28%),
+			linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+			rgba(9, 17, 31, 0.82);
+		box-shadow:
+			0 28px 65px rgba(0, 0, 0, 0.22),
+			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+	}
+
+	.faq-spotlight-copy strong {
+		display: block;
+		margin-top: 0.7rem;
+		font-size: clamp(1.8rem, 3vw, 2.6rem);
+		line-height: 1;
+		letter-spacing: -0.05em;
+	}
+
+	.faq-spotlight-copy p {
+		margin: 0.9rem 0 0;
+		color: rgba(236, 243, 255, 0.76);
+		line-height: 1.72;
+	}
+
+	.faq-route-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.faq-route-card {
+		min-height: 100%;
+	}
+
+	.faq-grid .faq-card:nth-child(3n + 2) {
+		transform: translateY(1.6rem);
+	}
+
+	.faq-grid .faq-card:nth-child(3n) {
+		transform: translateY(0.8rem);
+	}
+
+	@media (max-width: 1100px) {
+		.faq-spotlight,
+		.faq-route-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.faq-grid .faq-card:nth-child(3n + 2),
+		.faq-grid .faq-card:nth-child(3n) {
+			transform: none;
+		}
+	}
+</style>

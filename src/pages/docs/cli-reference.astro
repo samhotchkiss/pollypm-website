@@ -1,5 +1,5 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import DocsFrame from '../../components/DocsFrame.astro';
 
 const commandGroups = [
 	{
@@ -116,168 +116,105 @@ const commonIssues = [
 ];
 ---
 
-<Layout
+<DocsFrame
 	title="CLI and Configuration Reference | PollyPM Docs"
 	description="Practical CLI commands, configuration examples, and operating notes for PollyPM."
+	heroTitle="CLI commands and config you will actually use."
+	heroSummary="This page is a practical reference for day-one PollyPM operation: project setup, launch commands, provider routing, config examples, and a short list of common mistakes."
+	currentPath="/docs/cli-reference"
+	pills={['CLI', 'Configuration', 'Operations']}
 >
-	<div class="page-shell">
-		<header class="site-header">
-			<div class="container nav-row">
-				<a class="brand" href="/">
-					<span class="brand-mark"><span>PP</span></span>
-					<span class="brand-copy">
-						<small>PollyPM Docs</small>
-						<strong>CLI and Configuration Reference</strong>
-					</span>
-				</a>
-				<nav class="nav-links" aria-label="Documentation">
-					<a href="/">Home</a>
-					<a href="/docs">Docs</a>
-					<a href="/docs/getting-started">Getting Started</a>
-					<a href="/docs/concepts">Concepts</a>
-					<a href="/docs/cli-reference" aria-current="page">CLI Reference</a>
-					<a href="/docs/faq">FAQ</a>
-				</nav>
-			</div>
-		</header>
+	<section class="docs-section">
+		<div class="docs-section-head">
+			<span class="docs-eyebrow">Command Reference</span>
+			<h2>The normal operator loop from initialization to recovery.</h2>
+			<p class="docs-section-copy">These commands cover the small set an operator will actually reach for in daily use.</p>
+		</div>
 
-		<main id="main-content">
-			<section class="docs-hero">
-				<div class="container">
-					<span class="eyebrow">Documentation</span>
-					<h1>CLI commands and config you will actually use.</h1>
-					<p>
-						This page is a practical reference for day-one PollyPM operation: project setup, launch
-						commands, provider routing, config examples, and a short list of common mistakes.
-					</p>
-					<div class="docs-meta">
-						<span class="chip">CLI</span>
-						<span class="chip">Configuration</span>
-						<span class="chip">Operations</span>
-					</div>
-				</div>
-			</section>
-
-			<section class="section">
-				<div class="container">
-					<div class="section-heading">
-						<h2>Command reference</h2>
-						<p>These commands cover the normal operator loop from initialization to recovery.</p>
-					</div>
-					<div class="docs-grid">
-						{
-							commandGroups.map((group) => (
-								<article class="doc-card">
-									<strong>{group.title}</strong>
-									<ul class="command-list">
-										{group.items.map((item) => (
-											<li>
-												<code>{item.command}</code>
-												<span>{item.description}</span>
-											</li>
-										))}
-									</ul>
-								</article>
-							))
-						}
-					</div>
-				</div>
-			</section>
-
-			<section class="section">
-				<div class="container split-grid">
-					<div class="info-panel">
-						<div class="section-heading">
-							<h2>Configuration examples</h2>
-							<p>Keep config explicit so providers, repos, and lane intent are easy to inspect later.</p>
-						</div>
-						<ul class="command-list">
-							{
-								configFiles.map((item) => (
-									<li>
-										<code>{item.title}</code>
-										<span>{item.description}</span>
-										<pre><code>{item.content}</code></pre>
-									</li>
-								))
-							}
+		<div class="docs-grid two-up">
+			{
+				commandGroups.map((group) => (
+					<article class="docs-block">
+						<span class="docs-card-label">{group.title}</span>
+						<strong>{group.title}</strong>
+						<ul class="docs-command-list">
+							{group.items.map((item) => (
+								<li class="docs-command-item">
+									<span class="docs-command-label">Command</span>
+									<code>{item.command}</code>
+									<span>{item.description}</span>
+								</li>
+							))}
 						</ul>
-					</div>
+					</article>
+				))
+			}
+		</div>
+	</section>
 
-					<div class="info-panel">
-						<div class="section-heading">
-							<h2>Practical notes</h2>
-							<p>These habits make the CLI output easier to operate once several lanes are active.</p>
-						</div>
-						<ul>
-							{practicalNotes.map((item) => <li>{item}</li>)}
-						</ul>
-					</div>
+	<section class="docs-section">
+		<div class="docs-split">
+			<div class="docs-block">
+				<div class="docs-section-head">
+					<span class="docs-eyebrow">Configuration</span>
+					<h2>Keep providers, repos, and lane intent explicit.</h2>
 				</div>
-			</section>
-
-			<section class="section">
-				<div class="container">
-					<div class="section-heading">
-						<h2>Common issues</h2>
-						<p>Most failures in early PollyPM usage come from environment or naming discipline, not from the command surface itself.</p>
-					</div>
-					<div class="concept-grid">
-						{
-							commonIssues.map((item) => (
-								<article class="doc-card">
-									<strong>{item.title}</strong>
-									<p>{item.description}</p>
-								</article>
-							))
-						}
-					</div>
-
-					<div class="cta-panel">
-						<div>
-							<h2>Use this page alongside getting started.</h2>
-							<p>
-								Get the system running with the onboarding guide, then come here when you need a fast
-								reference for commands, config, and common operator decisions.
-							</p>
-						</div>
-						<div class="button-row">
-							<a class="button button-primary" href="/docs/getting-started">Open getting started</a>
-							<a class="button button-secondary" href="/docs/concepts">Read concepts</a>
-						</div>
-					</div>
-				</div>
-			</section>
-		</main>
-
-		<footer class="site-footer">
-			<div class="container footer-row">
-				<div class="footer-brand-block">
-					<a class="brand" href="/">
-						<span class="brand-mark"><span>PP</span></span>
-						<span class="brand-copy">
-							<small>PollyPM</small>
-							<strong>CLI and configuration reference for multi-agent operations</strong>
-						</span>
-					</a>
-				</div>
-				<div class="footer-link-groups">
-					<nav class="footer-nav-group" aria-label="Docs">
-						<strong>Docs</strong>
-						<a href="/docs">Docs home</a>
-						<a href="/docs/getting-started">Getting Started</a>
-						<a href="/docs/concepts">Concepts</a>
-						<a href="/docs/cli-reference" aria-current="page">CLI Reference</a>
-						<a href="/docs/faq">FAQ</a>
-					</nav>
-					<nav class="footer-nav-group" aria-label="Site">
-						<strong>Site</strong>
-						<a href="/">Home</a>
-						<a href="/#features">Features</a>
-						<a href="/#how-it-works">How it works</a>
-					</nav>
-				</div>
+				<ul class="docs-command-list">
+					{
+						configFiles.map((item) => (
+							<li class="docs-command-item">
+								<span class="docs-command-label">{item.title}</span>
+								<code>{item.description}</code>
+								<div class="docs-snippet">
+									<code>{item.content}</code>
+								</div>
+							</li>
+						))
+					}
+				</ul>
 			</div>
-		</footer>
-	</div>
-</Layout>
+
+			<div class="docs-callout">
+				<div class="docs-section-head">
+					<span class="docs-eyebrow">Practical Notes</span>
+					<h2>Habits that make the CLI output easier to operate.</h2>
+				</div>
+				<ul class="docs-list">
+					{practicalNotes.map((item) => <li>{item}</li>)}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="docs-section">
+		<div class="docs-section-head">
+			<span class="docs-eyebrow">Common Issues</span>
+			<h2>Most early failures come from environment or naming discipline.</h2>
+			<p class="docs-section-copy">These are the predictable things to check before you blame the command surface itself.</p>
+		</div>
+
+		<div class="docs-grid two-up">
+			{
+				commonIssues.map((item) => (
+					<article class="docs-card">
+						<strong>{item.title}</strong>
+						<p>{item.description}</p>
+					</article>
+				))
+			}
+		</div>
+
+		<div class="docs-cta">
+			<div>
+				<span class="docs-card-label">Use with onboarding</span>
+				<strong>Keep this page open once the pilot is live.</strong>
+				<p class="docs-section-copy">Get the system running with the onboarding guide, then come here when you need a fast reference for commands, config, and common operator decisions.</p>
+			</div>
+
+			<div class="docs-actions">
+				<a class="docs-button primary" href="/docs/getting-started">Open getting started</a>
+				<a class="docs-button secondary" href="/docs/concepts">Read concepts</a>
+			</div>
+		</div>
+	</section>
+</DocsFrame>

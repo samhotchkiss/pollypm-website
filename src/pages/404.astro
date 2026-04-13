@@ -1,5 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const recoveryLinks = [
+	{
+		label: 'Product overview',
+		title: 'Return to the homepage',
+		description: 'Use the landing page if you were trying to understand what PollyPM does and why the product exists.',
+		href: '/',
+	},
+	{
+		label: 'Documentation hub',
+		title: 'Browse the docs',
+		description: 'Start from the docs hub if you were looking for installation, concepts, or CLI guidance.',
+		href: '/docs',
+	},
+	{
+		label: 'Fastest entry point',
+		title: 'Open getting started',
+		description: 'Go straight to the onboarding guide if you just need the first-run operator path.',
+		href: '/docs/getting-started',
+	},
+];
 ---
 
 <Layout
@@ -7,17 +28,18 @@ import Layout from '../layouts/Layout.astro';
 	description="The page you requested does not exist on PollyPM. Return to the home page or continue with the documentation hub."
 	noindex={true}
 >
-	<div class="page-shell">
-		<header class="site-header">
-			<div class="container nav-row">
-				<a class="brand" href="/">
-					<span class="brand-mark"><span>PP</span></span>
+	<div class="not-found">
+		<header class="not-found-header">
+			<div class="shell topbar">
+				<a class="brand" href="/" aria-label="PollyPM home">
+					<span class="brand-mark">PP</span>
 					<span class="brand-copy">
 						<small>PollyPM</small>
-						<strong>Page Not Found</strong>
+						<strong>Recovery Route</strong>
 					</span>
 				</a>
-				<nav class="nav-links" aria-label="Primary">
+
+				<nav class="topnav" aria-label="Primary">
 					<a href="/">Home</a>
 					<a href="/docs">Docs</a>
 					<a href="/docs/getting-started">Getting Started</a>
@@ -27,73 +49,497 @@ import Layout from '../layouts/Layout.astro';
 		</header>
 
 		<main id="main-content">
-			<section class="docs-hero">
-				<div class="container">
-					<span class="eyebrow">404 error</span>
-					<h1>This route is empty.</h1>
-					<p>The page may have moved, or the URL is wrong. Use the links below to jump back into the site.</p>
-					<div class="button-row">
-						<a class="button button-primary" href="/">Go home</a>
-						<a class="button button-secondary" href="/docs">Open docs</a>
+			<section class="hero-404">
+				<div class="shell hero-grid">
+					<div class="hero-copy">
+						<span class="eyebrow">404 Error</span>
+						<h1>This route fell off the map.</h1>
+						<p>
+							The page may have moved, the URL may be wrong, or the path never existed. Use one of the
+							known routes below to jump back into the site without guessing.
+						</p>
+
+						<div class="actions">
+							<a class="button primary" href="/">Go home</a>
+							<a class="button secondary" href="/docs">Open docs</a>
+						</div>
+
+						<div class="route-pill">
+							<span>Suggested reset</span>
+							<code>/docs/getting-started</code>
+						</div>
+					</div>
+
+					<div class="hero-panel" aria-hidden="true">
+						<div class="orbit orbit-large"></div>
+						<div class="orbit orbit-small"></div>
+
+						<div class="error-card">
+							<span>Route status</span>
+							<strong>Not found</strong>
+							<p>No matching page at this path.</p>
+						</div>
+
+						<div class="recovery-card">
+							<div>
+								<span>Recovery path</span>
+								<strong>Home or docs</strong>
+							</div>
+							<div>
+								<span>Fastest onboarding</span>
+								<strong>Getting started</strong>
+							</div>
+							<div>
+								<span>Architecture context</span>
+								<strong>Concepts</strong>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
 
-			<section class="section">
-				<div class="container split-grid">
-					<div class="info-panel">
-						<div class="section-heading">
-							<h2>Common next steps</h2>
-						</div>
-						<ul>
-							<li>Return to the marketing homepage.</li>
-							<li>Open the docs overview and choose the right guide.</li>
-							<li>Jump to getting started, concepts, or FAQ.</li>
-						</ul>
+			<section class="recovery-section">
+				<div class="shell">
+					<div class="section-head">
+						<span class="eyebrow">Recovery Links</span>
+						<h2>Start from a known route.</h2>
+						<p>Pick the path that matches what you were trying to do and get back into a valid part of the site quickly.</p>
 					</div>
 
-					<div class="cta-panel">
-						<div>
-							<h2>Start from a known route.</h2>
-							<p>Use the docs if you want setup or architecture guidance, or the home page if you want the product overview.</p>
-						</div>
-						<div class="button-row">
-							<a class="button button-primary" href="/">Home</a>
-							<a class="button button-secondary" href="/docs">Docs home</a>
-						</div>
+					<div class="recovery-grid">
+						{
+							recoveryLinks.map((link) => (
+								<a class="recovery-tile" href={link.href}>
+									<span>{link.label}</span>
+									<strong>{link.title}</strong>
+									<p>{link.description}</p>
+								</a>
+							))
+						}
 					</div>
 				</div>
 			</section>
 		</main>
-
-		<footer class="site-footer">
-			<div class="container footer-row">
-				<div class="footer-brand-block">
-					<a class="brand" href="/">
-						<span class="brand-mark"><span>PP</span></span>
-						<span class="brand-copy">
-							<small>PollyPM</small>
-							<strong>Operator-facing docs for multi-agent engineering</strong>
-						</span>
-					</a>
-				</div>
-				<div class="footer-link-groups">
-					<nav class="footer-nav-group" aria-label="Site">
-						<strong>Site</strong>
-						<a href="/">Home</a>
-						<a href="/#features">Features</a>
-						<a href="/#how-it-works">How it works</a>
-					</nav>
-					<nav class="footer-nav-group" aria-label="Docs">
-						<strong>Docs</strong>
-						<a href="/docs">Docs home</a>
-						<a href="/docs/getting-started">Getting Started</a>
-						<a href="/docs/concepts">Concepts</a>
-						<a href="/docs/cli-reference">CLI Reference</a>
-						<a href="/docs/faq">FAQ</a>
-					</nav>
-				</div>
-			</div>
-		</footer>
 	</div>
 </Layout>
+
+<style>
+	.not-found {
+		position: relative;
+		overflow: clip;
+	}
+
+	.not-found::before,
+	.not-found::after {
+		content: '';
+		position: fixed;
+		pointer-events: none;
+		filter: blur(70px);
+		opacity: 0.65;
+		z-index: 0;
+	}
+
+	.not-found::before {
+		top: 8rem;
+		left: -7rem;
+		width: 22rem;
+		height: 22rem;
+		background: rgba(255, 131, 87, 0.18);
+	}
+
+	.not-found::after {
+		right: -4rem;
+		bottom: 10rem;
+		width: 24rem;
+		height: 24rem;
+		background: rgba(124, 242, 214, 0.14);
+	}
+
+	.shell {
+		position: relative;
+		z-index: 1;
+		width: min(1180px, calc(100% - 2rem));
+		margin: 0 auto;
+	}
+
+	.not-found-header {
+		position: sticky;
+		top: 0;
+		z-index: 22;
+		padding: 1rem 0 0;
+	}
+
+	.topbar,
+	.error-card,
+	.recovery-card,
+	.route-pill,
+	.recovery-tile {
+		position: relative;
+		border: 1px solid rgba(255, 255, 255, 0.09);
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+			rgba(9, 17, 31, 0.82);
+		box-shadow:
+			0 28px 65px rgba(0, 0, 0, 0.22),
+			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+		backdrop-filter: blur(18px);
+	}
+
+	.topbar::before,
+	.error-card::before,
+	.recovery-card::before,
+	.route-pill::before,
+	.recovery-tile::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		padding: 1px;
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.2),
+			rgba(255, 255, 255, 0.02) 35%,
+			rgba(124, 242, 214, 0.16) 70%,
+			rgba(255, 131, 87, 0.18)
+		);
+		-webkit-mask:
+			linear-gradient(#fff 0 0) content-box,
+			linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+		mask-composite: exclude;
+		pointer-events: none;
+	}
+
+	.topbar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1rem 1.15rem;
+		border-radius: 999px;
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.85rem;
+		text-decoration: none;
+	}
+
+	.brand-mark {
+		display: grid;
+		place-items: center;
+		width: 2.8rem;
+		height: 2.8rem;
+		border-radius: 18px;
+		font-family: 'Space Grotesk', sans-serif;
+		font-weight: 700;
+		letter-spacing: -0.05em;
+		color: #09111a;
+		background: linear-gradient(135deg, #7cf2d6 0%, #f6d67d 52%, #ff8357 100%);
+	}
+
+	.brand-copy small,
+	.brand-copy strong {
+		display: block;
+	}
+
+	.brand-copy small,
+	.eyebrow,
+	.route-pill span,
+	.error-card span,
+	.recovery-card span,
+	.recovery-tile span {
+		font-size: 0.76rem;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: rgba(236, 243, 255, 0.56);
+	}
+
+	.brand-copy strong {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 1rem;
+		letter-spacing: -0.03em;
+	}
+
+	.topnav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem;
+	}
+
+	.topnav a,
+	.button,
+	.recovery-tile {
+		text-decoration: none;
+	}
+
+	.topnav a {
+		padding: 0.55rem 0.85rem;
+		border-radius: 999px;
+		color: rgba(236, 243, 255, 0.76);
+		transition:
+			background 180ms ease,
+			transform 180ms ease;
+	}
+
+	.topnav a:hover,
+	.topnav a:focus-visible,
+	.button:hover,
+	.button:focus-visible,
+	.recovery-tile:hover,
+	.recovery-tile:focus-visible {
+		transform: translateY(-2px);
+	}
+
+	.topnav a:hover,
+	.topnav a:focus-visible {
+		background: rgba(255, 255, 255, 0.06);
+	}
+
+	.hero-404 {
+		position: relative;
+		padding: 4.75rem 0 2.5rem;
+	}
+
+	.hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.78fr);
+		gap: 1.5rem;
+		align-items: center;
+	}
+
+	.eyebrow {
+		display: inline-flex;
+		padding: 0.45rem 0.8rem;
+		border-radius: 999px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		background: rgba(255, 255, 255, 0.04);
+		color: #ffdca2;
+		font-weight: 800;
+	}
+
+	.hero-copy h1 {
+		margin: 1rem 0 0.9rem;
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: clamp(3.2rem, 8vw, 5.8rem);
+		line-height: 0.95;
+		letter-spacing: -0.07em;
+		max-width: 10ch;
+	}
+
+	.hero-copy p,
+	.section-head p,
+	.recovery-tile p,
+	.error-card p {
+		color: rgba(236, 243, 255, 0.76);
+		line-height: 1.72;
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.9rem;
+		margin-top: 1.6rem;
+	}
+
+	.button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.95rem 1.25rem;
+		border-radius: 999px;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		transition:
+			transform 180ms ease,
+			box-shadow 180ms ease;
+	}
+
+	.button.primary {
+		color: #07111f;
+		background: linear-gradient(135deg, #7cf2d6 0%, #f6d67d 52%, #ff8357 100%);
+		box-shadow: 0 18px 44px rgba(255, 131, 87, 0.2);
+	}
+
+	.button.secondary {
+		color: #eef4ff;
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+	}
+
+	.route-pill {
+		display: inline-flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		margin-top: 1.2rem;
+		padding: 1rem 1.05rem;
+		border-radius: 22px;
+	}
+
+	.route-pill code {
+		font-family: 'SFMono-Regular', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+		color: #f8fbff;
+	}
+
+	.hero-panel {
+		position: relative;
+		min-height: 26rem;
+	}
+
+	.orbit {
+		position: absolute;
+		border-radius: 999px;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		animation: orbit-spin 18s linear infinite;
+	}
+
+	.orbit-large {
+		inset: 1rem;
+	}
+
+	.orbit-small {
+		inset: 4rem;
+		animation-direction: reverse;
+		animation-duration: 13s;
+	}
+
+	.error-card {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: min(18rem, 100%);
+		padding: 1.2rem;
+		border-radius: 28px;
+		transform: rotate(3deg);
+	}
+
+	.error-card strong,
+	.recovery-card strong,
+	.recovery-tile strong {
+		display: block;
+		margin-top: 0.5rem;
+		font-size: 1.15rem;
+		letter-spacing: -0.04em;
+	}
+
+	.recovery-card {
+		position: absolute;
+		left: 0;
+		right: 2rem;
+		bottom: 0;
+		display: grid;
+		gap: 0.85rem;
+		padding: 1rem;
+		border-radius: 28px;
+	}
+
+	.recovery-section {
+		padding: 1rem 0 4rem;
+	}
+
+	.section-head {
+		max-width: 42rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.section-head h2 {
+		margin: 0.8rem 0 0.75rem;
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: clamp(2.1rem, 4vw, 3.7rem);
+		line-height: 1;
+		letter-spacing: -0.06em;
+	}
+
+	.recovery-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.recovery-tile {
+		display: block;
+		padding: 1.2rem;
+		border-radius: 28px;
+		transition:
+			transform 180ms ease,
+			border-color 180ms ease;
+	}
+
+	.recovery-tile:hover,
+	.recovery-tile:focus-visible {
+		border-color: rgba(255, 255, 255, 0.16);
+	}
+
+	.recovery-tile p {
+		margin: 0.75rem 0 0;
+	}
+
+	@keyframes orbit-spin {
+		from {
+			transform: rotate(0deg);
+		}
+
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	@media (max-width: 1100px) {
+		.not-found-header {
+			position: relative;
+		}
+
+		.topbar,
+		.hero-grid,
+		.recovery-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.topbar {
+			border-radius: 30px;
+		}
+
+		.hero-panel {
+			min-height: 23rem;
+		}
+
+		.recovery-card {
+			right: 0;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.shell {
+			width: min(calc(100% - 1.2rem), 1180px);
+		}
+
+		.topnav a {
+			width: 100%;
+			display: inline-flex;
+			justify-content: center;
+		}
+
+		.hero-404 {
+			padding-top: 2.8rem;
+		}
+
+		.hero-copy h1 {
+			font-size: clamp(2.8rem, 14vw, 4.2rem);
+		}
+
+		.hero-panel {
+			min-height: 24rem;
+		}
+
+		.error-card {
+			width: 86%;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.orbit {
+			animation: none;
+		}
+	}
+</style>
