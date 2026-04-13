@@ -29,7 +29,7 @@ npm run preview
 
 `npm run dev`, `npm run build`, `npm run check`, `npm run preview`, and `npm run astro ...` also enforce the supported Node runtime and will fail fast unless you are running Node `22.x` at or above `22.12.0`.
 
-If you see `Node 22.x >= 22.12.0 is required for this repo`, switch to a compatible Node `22.x` runtime first, then rerun the command.
+If you see `Node >=22.12.0 <23 is required for this repo`, switch to a compatible Node `22.x` runtime first, then rerun the command.
 
 On macOS with Homebrew `node@22`, the repo provides wrapper scripts that run commands against the compatible runtime on either standard Homebrew prefix:
 

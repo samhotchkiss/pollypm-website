@@ -28,21 +28,73 @@ function isAtLeast(actual, minimum) {
 	return true;
 }
 
-function parseSupportedMajor(range) {
-	const match = range.match(/(\d+)\./);
-	return match ? Number.parseInt(match[1], 10) : null;
+function compareVersions(left, right) {
+	for (let index = 0; index < Math.max(left.length, right.length); index += 1) {
+		const leftPart = left[index] ?? 0;
+		const rightPart = right[index] ?? 0;
+
+		if (leftPart > rightPart) return 1;
+		if (leftPart < rightPart) return -1;
+	}
+
+	return 0;
+}
+
+function parseSupportedRange(range) {
+	const constraints = range
+		.split(/\s+/)
+		.map((constraint) => constraint.trim())
+		.filter(Boolean)
+		.map((constraint) => {
+			const match = constraint.match(/^(>=|>|<=|<|=)?v?(\d+(?:\.\d+)*)$/);
+
+			if (!match) return null;
+
+			return {
+				operator: match[1] ?? '=',
+				version: parseVersion(match[2]),
+			};
+		});
+
+	if (constraints.length === 0 || constraints.some((constraint) => constraint === null)) {
+		return null;
+	}
+
+	return constraints;
+}
+
+function satisfiesRange(actual, constraints) {
+	return constraints.every(({ operator, version }) => {
+		const comparison = compareVersions(actual, version);
+
+		switch (operator) {
+			case '>':
+				return comparison > 0;
+			case '>=':
+				return comparison >= 0;
+			case '<':
+				return comparison < 0;
+			case '<=':
+				return comparison <= 0;
+			case '=':
+				return comparison === 0;
+			default:
+				return false;
+		}
+	});
 }
 
 const minimumVersion = fs.readFileSync(versionFile, 'utf8').trim().replace(/^v/, '');
 const alternateMinimumVersion = fs.readFileSync(alternateVersionFile, 'utf8').trim().replace(/^v/, '');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonFile, 'utf8'));
 const supportedRange = packageJson.engines?.node ?? '';
-const supportedMajor = parseSupportedMajor(supportedRange);
+const supportedConstraints = parseSupportedRange(supportedRange);
+const supportedMajor = supportedConstraints?.find(({ operator }) => operator === '>=' || operator === '=')?.version[0] ?? null;
 const actualVersion = process.version.replace(/^v/, '');
 const actualParts = parseVersion(actualVersion);
 const minimumParts = parseVersion(minimumVersion);
 
-if (supportedMajor === null) {
+if (!supportedRange || supportedConstraints === null || supportedMajor === null) {
 	console.error('Unable to determine the supported Node version range from package.json.');
 	process.exit(1);
 }
@@ -54,9 +106,9 @@ if (minimumVersion !== alternateMinimumVersion) {
 	process.exit(1);
 }
 
-if (actualParts[0] !== supportedMajor || !isAtLeast(actualParts, minimumParts)) {
+if (!satisfiesRange(actualParts, supportedConstraints) || !isAtLeast(actualParts, minimumParts)) {
 	console.error(
-		`Node ${supportedMajor}.x >= ${minimumVersion} is required for this repo. Current version: ${actualVersion}. Run \`nvm use\` or switch your Node version manager to a compatible ${supportedMajor}.x release.`,
+		`Node ${supportedRange} is required for this repo. Current version: ${actualVersion}. Run \`nvm use\` or switch your Node version manager to a compatible ${supportedMajor}.x release.`,
 	);
 	process.exit(1);
 }

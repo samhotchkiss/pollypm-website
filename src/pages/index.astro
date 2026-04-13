@@ -1,194 +1,250 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const features = [
+const featureShowcase = [
 	{
-		title: 'Coordinate many agents',
+		icon: 'MC',
+		title: 'Mission control',
 		description:
-			'Run Claude, Codex, and other tools as one delivery system instead of a pile of disconnected chats and terminals.',
+			'Watch every lane, owner, provider, and recovery event from one operator view instead of chasing tabs and shell history.',
 	},
 	{
-		title: 'See session health',
+		icon: 'GW',
+		title: 'Git-safe workflows',
 		description:
-			'Heartbeat monitoring makes stalled, healthy, and recovered lanes visible before work silently disappears.',
+			'Every active lane runs in an isolated worktree so AI output stays attributable, reviewable, and mergeable.',
 	},
 	{
-		title: 'Route around provider limits',
+		icon: 'PF',
+		title: 'Provider failover',
 		description:
-			'Move work to another provider or account when quotas, outages, or model availability interrupt execution.',
+			'Reroute around quota hits, outages, or account limits without throwing away execution context.',
 	},
 	{
-		title: 'Keep parallel changes clean',
+		icon: 'HS',
+		title: 'Health signals',
 		description:
-			'Separate worktrees give each lane an isolated Git workspace so output stays reviewable and mergeable.',
+			'Detect stalled, recovered, and ready-for-review sessions before work silently disappears.',
 	},
 	{
-		title: 'Operate from one CLI',
+		icon: 'OP',
+		title: 'Operator controls',
 		description:
-			'Launch, monitor, hand off, and recover work from `pollypm` instead of reconstructing state from shell history.',
+			'Intervene, checkpoint, and hand off at the right moment instead of restarting a lane from scratch.',
 	},
 	{
-		title: 'Track work across repos',
+		icon: 'CL',
+		title: 'One CLI surface',
 		description:
-			'Keep project-level visibility even when the delivery path spans several repositories, services, or branches.',
+			'Launch, monitor, recover, and review with one operating model instead of improvised scripts and conventions.',
 	},
 ];
 
-const workflow = [
+const operatingStats = [
+	{ value: '1', label: 'control plane for multi-agent execution' },
+	{ value: 'N', label: 'managed lanes running in parallel' },
+	{ value: '24/7', label: 'visibility into health and handoff state' },
+];
+
+const operatingSteps = [
 	{
-		title: 'Define the project',
+		index: '01',
+		title: 'Frame the project once',
 		description:
-			'Describe the job, register the repositories involved, and decide which lanes need to run in parallel.',
+			'Define the project, assign repos, and split the work into lanes with clear ownership before execution starts.',
 	},
 	{
-		title: 'Launch managed lanes',
+		index: '02',
+		title: 'Launch managed delivery lanes',
 		description:
-			'PollyPM starts agent sessions inside tmux with scoped tasks, known ownership, and isolated worktrees.',
+			'PollyPM starts agents inside tmux-backed sessions with isolated worktrees and a known operating path.',
 	},
 	{
-		title: 'Monitor and intervene',
+		index: '03',
+		title: 'Recover instead of restarting',
 		description:
-			'Operators can watch health, fail over providers, hand work back for review, and keep the project moving.',
+			'When a lane drifts, stalls, or hits provider limits, the operator can recover it without losing project context.',
 	},
 ];
 
-const docCards = [
+const proofCards = [
 	{
-		title: 'Getting Started',
-		description: 'Install PollyPM, configure providers, and launch a real first project.',
-		href: '/docs/getting-started',
+		label: 'For teams moving beyond demos',
+		copy: 'Useful AI output is not the bottleneck anymore. Coordination, recoverability, and merge safety are.',
 	},
 	{
-		title: 'Operating Model',
-		description: 'Understand projects, sessions, worktrees, provider paths, and operator checkpoints.',
-		href: '/docs/concepts',
+		label: 'For engineering managers and operators',
+		copy: 'PollyPM gives you a system you can inspect, intervene in, and explain to the rest of the team.',
 	},
 	{
-		title: 'Day-One Operations',
-		description: 'Learn the monitor, handoff, and recovery loop that keeps long-running agent work stable.',
-		href: '/docs/cli-reference',
+		label: 'For real repositories',
+		copy: 'The product is designed around the friction that appears when many agents touch Git, providers, and long-running tasks at once.',
 	},
-	{
-		title: 'FAQ',
-		description: 'Get short answers to rollout, architecture, and operating questions before a first pilot.',
-		href: '/docs/faq',
-	},
+];
+
+const docLinks = [
+	{ title: 'Get Started', href: '/docs/getting-started' },
+	{ title: 'Concepts', href: '/docs/concepts' },
+	{ title: 'CLI Reference', href: '/docs/cli-reference' },
+	{ title: 'Docs Hub', href: '/docs' },
+];
+
+const demoTimeline = [
+	{ phase: 'Launch', detail: 'Create scoped lanes with isolated worktrees and known owners.' },
+	{ phase: 'Monitor', detail: 'Track health, stall signals, provider paths, and review checkpoints.' },
+	{ phase: 'Recover', detail: 'Reroute a lane without losing project context or branch hygiene.' },
 ];
 ---
 
 <Layout
-	title="PollyPM | The PM Layer for Multi-Agent Software Delivery"
-	description="PollyPM orchestrates Claude, Codex, and other AI agents across projects with tmux-backed supervision, worktree isolation, provider failover, and an operator-facing CLI."
+	title="PollyPM | Multi-Agent Delivery, Actually Operable"
+	description="PollyPM is the control plane for multi-agent software delivery, with lane supervision, isolated worktrees, provider failover, and an operator-grade CLI."
 >
-	<div class="page-shell">
-		<header class="site-header">
-			<div class="container nav-row">
-				<a class="brand" href="/">
-					<span class="brand-mark"><span>PP</span></span>
-					<span class="brand-copy">
-						<small>AI Project Management</small>
+	<div class="home">
+		<header class="masthead">
+			<div class="shell masthead-bar">
+				<a class="brand" href="/" aria-label="PollyPM home">
+					<span class="brand-badge">PP</span>
+					<span class="brand-text">
+						<small>AI project management</small>
 						<strong>PollyPM</strong>
 					</span>
 				</a>
-				<nav class="nav-links" aria-label="Primary">
+
+				<nav class="masthead-nav" aria-label="Primary">
 					<a href="#features">Features</a>
-					<a href="#how-it-works">How it works</a>
+					<a href="#operating-model">How it works</a>
+					<a href="#proof">Why it matters</a>
 					<a href="/docs">Docs</a>
-					<a href="/docs/getting-started">Getting Started</a>
 				</nav>
+
+				<a class="nav-cta" href="/docs/getting-started">Start onboarding</a>
 			</div>
 		</header>
 
 		<main id="main-content">
 			<section class="hero">
-				<div class="container hero-grid">
+				<div class="shell hero-grid">
 					<div class="hero-copy">
-						<span class="eyebrow">AI project management for engineering teams</span>
-						<h1>PollyPM is the control plane for multi-agent software delivery.</h1>
-						<p>
-							When teams start using several AI agents at once, the failure mode is not model quality.
-							It is coordination. PollyPM gives you one place to launch work, monitor session health,
-							isolate Git changes, reroute around provider failures, and keep the whole project
-							operable.
+						<span class="hero-eyebrow">A control plane for AI delivery teams</span>
+						<h1>Multi-agent software delivery needs orchestration, not optimism.</h1>
+						<p class="hero-lead">
+							PollyPM gives engineering teams one operating layer for launching work, watching lane
+							health, isolating Git changes, and recovering execution when providers or sessions go
+							sideways.
 						</p>
-						<div class="button-row">
+
+						<div class="hero-actions">
 							<a class="button button-primary" href="/docs/getting-started">Read getting started</a>
-							<a class="button button-secondary" href="#how-it-works">See how it works</a>
+							<a class="button button-secondary" href="#features">Explore the platform</a>
 						</div>
-						<div class="hero-notes" aria-label="Product highlights">
-							<span class="chip">tmux-backed sessions</span>
-							<span class="chip">heartbeat supervision</span>
-							<span class="chip">provider failover</span>
-							<span class="chip">isolated worktrees</span>
+
+						<ul class="hero-flags" aria-label="Key capabilities">
+							<li>tmux-backed supervision</li>
+							<li>provider failover</li>
+							<li>isolated worktrees</li>
+							<li>operator-first CLI</li>
+						</ul>
+
+						<div class="hero-command-card">
+							<span>Quick start path</span>
+							<code>npm install -g pollypm && pollypm init && pollypm launch</code>
 						</div>
 					</div>
 
-					<div class="hero-panel">
-						<div class="panel-header">
-							<span class="status-pill">Live</span>
-							<span>pollypm monitor</span>
-						</div>
-						<div class="terminal-card">
-							<div class="terminal-bar">
-								<div class="terminal-dots">
-									<span></span>
-									<span></span>
-									<span></span>
-								</div>
-								<span class="terminal-label">pollypm monitor --project launch-redesign</span>
+					<div class="hero-visual" aria-hidden="true">
+						<div class="visual-orbit orbit-large"></div>
+						<div class="visual-orbit orbit-small"></div>
+
+						<div class="signal-card signal-card-primary">
+							<div class="signal-topline">
+								<span class="signal-dot"></span>
+								<span>project: launch-redesign</span>
 							</div>
-							<div class="terminal-output">
-								<div class="terminal-line">
-									<small>frontend-refresh</small>
-									<code><span class="provider">codex</span> landing page in isolated worktree</code>
-									<span class="status-tag">healthy</span>
+							<strong>All delivery lanes visible</strong>
+							<p>Operator state stays legible even when several agents are shipping in parallel.</p>
+						</div>
+
+						<div class="terminal-frame">
+							<div class="terminal-bar">
+								<div class="terminal-lights">
+									<span></span>
+									<span></span>
+									<span></span>
 								</div>
-								<div class="terminal-line">
-									<small>docs-pass</small>
-									<code><span class="provider">claude</span> docs pass and rollout notes</code>
-									<span class="status-tag">healthy</span>
+								<code>pollypm monitor --project launch-redesign</code>
+							</div>
+
+							<div class="terminal-body">
+								<div class="terminal-row">
+									<span class="lane-name">landing-site</span>
+									<span class="lane-copy"><strong>codex</strong> homepage redesign in worktree</span>
+									<span class="lane-state healthy">healthy</span>
 								</div>
-								<div class="terminal-line">
-									<small>api-followup</small>
-									<code><span class="provider">fallback</span> reassigned after quota hit</code>
-									<span class="status-tag">recovered</span>
+								<div class="terminal-row">
+									<span class="lane-name">docs-pass</span>
+									<span class="lane-copy"><strong>claude</strong> revise rollout documentation</span>
+									<span class="lane-state healthy">healthy</span>
+								</div>
+								<div class="terminal-row">
+									<span class="lane-name">api-followup</span>
+									<span class="lane-copy"><strong>fallback</strong> rerouted after quota event</span>
+									<span class="lane-state recovered">recovered</span>
+								</div>
+								<div class="terminal-row">
+									<span class="lane-name">review-lane</span>
+									<span class="lane-copy"><strong>operator</strong> ready for checkpoint</span>
+									<span class="lane-state waiting">ready</span>
 								</div>
 							</div>
 						</div>
 
-						<div class="metrics">
-							<div class="metric">
-								<span>1 CLI</span>
-								<p>to launch, monitor, and recover every managed lane</p>
+						<div class="signal-strip">
+							<div>
+								<span>Providers</span>
+								<strong>Swappable mid-run</strong>
 							</div>
-							<div class="metric">
-								<span>N agents</span>
-								<p>running in parallel without sharing a working directory</p>
+							<div>
+								<span>Git state</span>
+								<strong>Separated by lane</strong>
 							</div>
-							<div class="metric">
-								<span>24/7</span>
-								<p>visibility into health, stalls, and intervention points</p>
+							<div>
+								<span>Recovery</span>
+								<strong>Operational, not ad hoc</strong>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<div class="shell stat-ribbon">
+					{
+						operatingStats.map((stat) => (
+							<div class="stat-item">
+								<strong>{stat.value}</strong>
+								<span>{stat.label}</span>
+							</div>
+						))
+					}
+				</div>
 			</section>
 
-			<section class="section" id="features">
-				<div class="container">
+			<section class="section feature-stage" id="features">
+				<div class="shell">
 					<div class="section-heading">
-						<h2>What PollyPM is for</h2>
+						<span class="section-kicker">Feature Showcase</span>
+						<h2>Built for the ugly parts of real multi-agent execution.</h2>
 						<p>
-							PollyPM is for teams that already know AI agents can produce useful work, but need
-							that work to stay organized, inspectable, and safe to run in parallel.
+							The hard problem is not getting an agent to produce output once. It is keeping many
+							lanes observable, recoverable, and safe to merge while the project is still moving.
 						</p>
 					</div>
 
-					<div class="card-grid">
+					<div class="feature-grid">
 						{
-							features.map((feature) => (
-								<article class="card">
-									<strong>{feature.title}</strong>
+							featureShowcase.map((feature) => (
+								<article class="feature-tile">
+									<span class="feature-icon" aria-hidden="true">{feature.icon}</span>
+									<h3>{feature.title}</h3>
 									<p>{feature.description}</p>
 								</article>
 							))
@@ -197,134 +253,1225 @@ const docCards = [
 				</div>
 			</section>
 
-			<section class="section" id="how-it-works">
-				<div class="container">
-					<div class="section-heading">
-						<h2>How PollyPM keeps agent work under control</h2>
+			<section class="section demo-stage" id="demo">
+				<div class="shell">
+					<div class="demo-panel">
+						<div class="demo-copy">
+							<span class="section-kicker">Animated Demo</span>
+							<h2>A project moving through launch, monitoring, and recovery.</h2>
+							<p>
+								The homepage demo is not decorative chrome. It shows the operating loop PollyPM is
+								built for: structured launch, live supervision, and recovery when one lane drifts.
+							</p>
+						</div>
+
+						<div class="demo-visual" aria-hidden="true">
+							<div class="demo-track"></div>
+							<div class="demo-pulse demo-pulse-one"></div>
+							<div class="demo-pulse demo-pulse-two"></div>
+							<div class="demo-node demo-node-one">
+								<span>01</span>
+								<strong>Launch</strong>
+							</div>
+							<div class="demo-node demo-node-two">
+								<span>02</span>
+								<strong>Monitor</strong>
+							</div>
+							<div class="demo-node demo-node-three">
+								<span>03</span>
+								<strong>Recover</strong>
+							</div>
+						</div>
+
+						<div class="demo-timeline">
+							{
+								demoTimeline.map((item) => (
+									<article class="timeline-card">
+										<span>{item.phase}</span>
+										<p>{item.detail}</p>
+									</article>
+								))
+							}
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="section operating-model" id="operating-model">
+				<div class="shell operating-grid">
+					<div class="section-heading left-align">
+						<span class="section-kicker">Operating Model</span>
+						<h2>Run AI agents like delivery lanes, not disconnected experiments.</h2>
 						<p>
-							The model is simple: define the project once, let lanes execute independently, and
-							give operators the controls they need when something drifts or stalls.
+							PollyPM adds the management layer between a capable model and a process a team can
+							trust under pressure.
 						</p>
 					</div>
 
 					<div class="steps-grid">
 						{
-							workflow.map((step, index) => (
-								<article class="step card">
-									<span class="step-index">0{index + 1}</span>
-									<strong>{step.title}</strong>
+							operatingSteps.map((step) => (
+								<article class="step-card">
+									<span class="step-index">{step.index}</span>
+									<h3>{step.title}</h3>
 									<p>{step.description}</p>
 								</article>
 							))
 						}
 					</div>
+				</div>
+			</section>
 
-					<div class="split-grid">
-						<div class="info-panel">
-							<div class="section-heading">
-								<h2>Why teams use it</h2>
-								<p>
-									PollyPM adds the missing management layer between a good model and a reliable
-									delivery process.
-								</p>
-							</div>
-							<ul>
-								<li>Know which sessions are healthy, stalled, recovered, or ready for review.</li>
-								<li>Keep multiple tasks moving without merging unrelated output into one branch.</li>
-								<li>Swap providers or accounts without rebuilding the whole operating flow.</li>
-								<li>Review AI output as normal Git work instead of opaque terminal state.</li>
-							</ul>
+			<section class="section proof-zone" id="proof">
+				<div class="shell">
+					<div class="proof-banner">
+						<div class="section-heading left-align">
+							<span class="section-kicker">Why Teams Switch</span>
+							<h2>PollyPM replaces manual coordination with a system you can actually operate.</h2>
 						</div>
 
-						<div class="info-panel">
-							<div class="section-heading">
-								<h2>What it replaces</h2>
-								<p>
-									Most multi-agent setups fail because coordination stays manual. PollyPM removes
-									the brittle parts.
-								</p>
-							</div>
-							<ul>
-								<li>No browser-tab babysitting to see whether a long run silently died.</li>
-								<li>No shared working directory where several agents overwrite each other.</li>
-								<li>No guesswork about which provider path a lane is currently using.</li>
-								<li>No reconstructing project history from shell logs and memory.</li>
-							</ul>
+						<div class="proof-grid">
+							{
+								proofCards.map((card) => (
+									<article class="proof-card">
+										<span>{card.label}</span>
+										<p>{card.copy}</p>
+									</article>
+								))
+							}
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<section class="section" id="docs">
-				<div class="container">
-					<div class="section-heading">
-						<h2>Start with the docs hub</h2>
+			<section class="section final-cta">
+				<div class="shell final-cta-panel">
+					<div>
+						<span class="section-kicker">Getting Started</span>
+						<h2>Bring PollyPM into a real repo with a clear first step.</h2>
 						<p>
-							The docs cover onboarding, concepts, operations, and common rollout questions for teams
-							making multi-agent execution work in a real repository.
+							Start with installation, provider setup, and the first managed project. The onboarding
+							path is structured to get a team from zero to an operable lane model quickly.
 						</p>
 					</div>
 
-					<div class="docs-grid">
-						{
-							docCards.map((card) => (
-								<a class="doc-card doc-link-card" href={card.href}>
-									<strong>{card.title}</strong>
-									<p>{card.description}</p>
-								</a>
-							))
-						}
+					<div class="cta-actions">
+						<a class="button button-primary" href="/docs/getting-started">Open getting started</a>
+						<a class="button button-secondary" href="/docs">Browse docs</a>
 					</div>
 
-					<div class="cta-panel">
-						<div>
-							<h2>Start with onboarding, then move into concepts and operations.</h2>
-							<p>
-								If you need multi-agent work to be observable, recoverable, and safe to merge, open
-								the docs hub first and pick the page that matches where your team is in the rollout.
-							</p>
-						</div>
-						<div class="button-row">
-							<a class="button button-primary" href="/docs">Open the docs</a>
-							<a class="button button-secondary" href="#features">Review capabilities</a>
-						</div>
+					<div class="cta-command">
+						<span>First run</span>
+						<code>pollypm init</code>
+					</div>
+
+					<div class="doc-pills" aria-label="Documentation links">
+						{docLinks.map((link) => <a href={link.href}>{link.title}</a>)}
 					</div>
 				</div>
 			</section>
 		</main>
-
-		<footer class="site-footer">
-			<div class="container footer-row">
-				<div class="footer-brand-block">
-					<a class="brand" href="/">
-						<span class="brand-mark"><span>PP</span></span>
-						<span class="brand-copy">
-							<small>PollyPM</small>
-							<strong>AI project management for multi-agent engineering</strong>
-						</span>
-					</a>
-					<p>
-						Coordinate AI agents like a software delivery system, not a loose collection of tabs,
-						terminals, and half-finished branches.
-					</p>
-				</div>
-				<div class="footer-link-groups">
-					<nav class="footer-nav-group" aria-label="Product">
-						<strong>Product</strong>
-						<a href="#features">Features</a>
-						<a href="#how-it-works">How it works</a>
-						<a href="/docs">Docs overview</a>
-					</nav>
-					<nav class="footer-nav-group" aria-label="Documentation">
-						<strong>Documentation</strong>
-						<a href="/docs">Docs overview</a>
-						<a href="/docs/getting-started">Getting Started</a>
-						<a href="/docs/concepts">Concepts</a>
-						<a href="/docs/cli-reference">CLI Reference</a>
-						<a href="/docs/faq">FAQ</a>
-					</nav>
-				</div>
-			</div>
-		</footer>
 	</div>
 </Layout>
+
+<style>
+	.home {
+		position: relative;
+		overflow: clip;
+	}
+
+	.home::before,
+	.home::after {
+		content: '';
+		position: fixed;
+		inset: auto;
+		pointer-events: none;
+		filter: blur(70px);
+		opacity: 0.7;
+		z-index: 0;
+	}
+
+	.home::before {
+		top: 6rem;
+		left: -7rem;
+		width: 20rem;
+		height: 20rem;
+		background: rgba(255, 122, 76, 0.22);
+	}
+
+	.home::after {
+		right: -4rem;
+		bottom: 12rem;
+		width: 24rem;
+		height: 24rem;
+		background: rgba(104, 225, 199, 0.16);
+	}
+
+	.shell {
+		position: relative;
+		z-index: 1;
+		width: min(1180px, calc(100% - 2rem));
+		margin: 0 auto;
+	}
+
+	.masthead {
+		position: sticky;
+		top: 0;
+		z-index: 25;
+		padding: 1rem 0 0;
+	}
+
+	.masthead-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1rem 1.15rem;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 999px;
+		background:
+			linear-gradient(180deg, rgba(8, 17, 30, 0.86), rgba(8, 17, 30, 0.64)),
+			rgba(8, 17, 30, 0.72);
+		backdrop-filter: blur(20px);
+		box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.85rem;
+		text-decoration: none;
+	}
+
+	.brand-badge {
+		display: grid;
+		place-items: center;
+		width: 2.85rem;
+		height: 2.85rem;
+		border-radius: 18px;
+		font-family: 'Space Grotesk', sans-serif;
+		font-weight: 700;
+		letter-spacing: -0.05em;
+		color: #09111a;
+		background:
+			linear-gradient(135deg, #7cf2d6 0%, #f4d177 50%, #ff8357 100%);
+		box-shadow:
+			0 12px 30px rgba(255, 131, 87, 0.25),
+			inset 0 1px 0 rgba(255, 255, 255, 0.65);
+	}
+
+	.brand-text small,
+	.brand-text strong {
+		display: block;
+	}
+
+	.brand-text small {
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: rgba(236, 243, 255, 0.62);
+	}
+
+	.brand-text strong {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 1rem;
+		letter-spacing: -0.03em;
+	}
+
+	.masthead-nav {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.3rem;
+	}
+
+	.masthead-nav a,
+	.nav-cta,
+	.doc-pills a {
+		text-decoration: none;
+	}
+
+	.masthead-nav a {
+		padding: 0.55rem 0.9rem;
+		border-radius: 999px;
+		color: rgba(236, 243, 255, 0.76);
+		transition:
+			background 180ms ease,
+			color 180ms ease,
+			transform 180ms ease;
+	}
+
+	.masthead-nav a:hover,
+	.masthead-nav a:focus-visible {
+		background: rgba(255, 255, 255, 0.06);
+		color: #ffffff;
+		transform: translateY(-1px);
+	}
+
+	.nav-cta,
+	.button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		transition:
+			transform 180ms ease,
+			box-shadow 180ms ease,
+			background 180ms ease,
+			border-color 180ms ease;
+	}
+
+	.nav-cta {
+		padding: 0.8rem 1.1rem;
+		color: #07111f;
+		background: #eef4ff;
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+	}
+
+	.nav-cta:hover,
+	.nav-cta:focus-visible,
+	.button:hover,
+	.button:focus-visible,
+	.doc-pills a:hover,
+	.doc-pills a:focus-visible {
+		transform: translateY(-2px);
+	}
+
+	.hero {
+		position: relative;
+		padding: 5rem 0 2rem;
+	}
+
+	.hero::before {
+		content: '';
+		position: absolute;
+		inset: 2rem 0 auto;
+		height: 42rem;
+		background:
+			radial-gradient(circle at 15% 18%, rgba(255, 131, 87, 0.26), transparent 24%),
+			radial-gradient(circle at 78% 22%, rgba(124, 242, 214, 0.18), transparent 22%),
+			linear-gradient(180deg, rgba(10, 20, 36, 0.25), rgba(10, 20, 36, 0));
+		z-index: 0;
+	}
+
+	.hero::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image:
+			linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+		background-size: 56px 56px;
+		mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 82%);
+		opacity: 0.32;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+		gap: 2rem;
+		align-items: center;
+	}
+
+	.hero-copy,
+	.hero-visual,
+	.stat-ribbon,
+	.feature-tile,
+	.demo-panel,
+	.timeline-card,
+	.step-card,
+	.proof-banner,
+	.final-cta-panel {
+		animation: rise-in 700ms ease both;
+	}
+
+	.hero-copy {
+		animation-delay: 80ms;
+	}
+
+	.hero-eyebrow,
+	.section-kicker,
+	.feature-kicker {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.45rem 0.8rem;
+		border-radius: 999px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		font-size: 0.76rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: #ffdca2;
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.hero h1 {
+		margin: 1.2rem 0 1rem;
+		max-width: 12ch;
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: clamp(3.8rem, 8vw, 6.6rem);
+		line-height: 0.94;
+		letter-spacing: -0.07em;
+	}
+
+	.hero-lead,
+	.section-heading p,
+	.feature-copy p,
+	.step-card p,
+	.proof-card p,
+	.final-cta-panel p {
+		color: rgba(236, 243, 255, 0.76);
+		font-size: 1.08rem;
+		line-height: 1.75;
+	}
+
+	.hero-lead {
+		max-width: 38rem;
+	}
+
+	.hero-actions,
+	.cta-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.95rem;
+		margin-top: 1.8rem;
+	}
+
+	.button {
+		padding: 0.95rem 1.35rem;
+		border: 1px solid transparent;
+	}
+
+	.button-primary {
+		color: #07111f;
+		background: linear-gradient(135deg, #7cf2d6 0%, #f6d67d 52%, #ff8357 100%);
+		box-shadow: 0 20px 45px rgba(255, 131, 87, 0.22);
+	}
+
+	.button-secondary {
+		color: #f2f6ff;
+		border-color: rgba(255, 255, 255, 0.14);
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.hero-flags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		padding: 0;
+		margin: 1.8rem 0 0;
+		list-style: none;
+	}
+
+	.hero-flags li,
+	.feature-points li,
+	.doc-pills a {
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.hero-flags li {
+		padding: 0.68rem 0.95rem;
+		border-radius: 999px;
+		color: rgba(236, 243, 255, 0.88);
+	}
+
+	.hero-command-card,
+	.cta-command {
+		display: inline-flex;
+		flex-direction: column;
+		gap: 0.55rem;
+		margin-top: 1.15rem;
+		padding: 1rem 1.1rem;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 22px;
+		background: rgba(255, 255, 255, 0.045);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+	}
+
+	.hero-command-card span,
+	.cta-command span {
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: rgba(236, 243, 255, 0.58);
+	}
+
+	.hero-command-card code,
+	.cta-command code {
+		font-size: 0.95rem;
+		color: #f8fbff;
+		word-break: break-word;
+	}
+
+	.hero-visual {
+		position: relative;
+		min-height: 42rem;
+		padding: 2rem 0;
+		animation-delay: 180ms;
+	}
+
+	.visual-orbit {
+		position: absolute;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 999px;
+	}
+
+	.orbit-large {
+		inset: 4rem 2rem 5rem 4rem;
+		background:
+			radial-gradient(circle at center, rgba(124, 242, 214, 0.08), transparent 55%);
+		animation: slow-spin 20s linear infinite;
+	}
+
+	.orbit-small {
+		inset: 8rem 7rem 9rem 8rem;
+		background:
+			radial-gradient(circle at center, rgba(255, 131, 87, 0.1), transparent 58%);
+		animation: slow-spin-reverse 16s linear infinite;
+	}
+
+	.signal-card,
+	.terminal-frame,
+	.signal-strip,
+	.stat-ribbon,
+	.feature-tile,
+	.demo-panel,
+	.timeline-card,
+	.step-card,
+	.proof-banner,
+	.final-cta-panel {
+		position: relative;
+		border: 1px solid rgba(255, 255, 255, 0.09);
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+			rgba(9, 17, 31, 0.82);
+		box-shadow:
+			0 30px 70px rgba(0, 0, 0, 0.26),
+			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+		backdrop-filter: blur(18px);
+	}
+
+	.signal-card::before,
+	.terminal-frame::before,
+	.feature-tile::before,
+	.demo-panel::before,
+	.timeline-card::before,
+	.step-card::before,
+	.proof-banner::before,
+	.final-cta-panel::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		padding: 1px;
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.24),
+			rgba(255, 255, 255, 0.03) 30%,
+			rgba(124, 242, 214, 0.15) 65%,
+			rgba(255, 131, 87, 0.18)
+		);
+		-webkit-mask:
+			linear-gradient(#fff 0 0) content-box,
+			linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+		mask-composite: exclude;
+		pointer-events: none;
+	}
+
+	.signal-card-primary {
+		position: absolute;
+		top: 1rem;
+		right: 0;
+		width: min(20rem, 82%);
+		padding: 1.2rem;
+		border-radius: 28px;
+		transform: rotate(3deg);
+	}
+
+	.signal-topline {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		font-size: 0.82rem;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: rgba(236, 243, 255, 0.62);
+	}
+
+	.signal-dot {
+		width: 0.65rem;
+		height: 0.65rem;
+		border-radius: 999px;
+		background: #7cf2d6;
+		box-shadow: 0 0 18px rgba(124, 242, 214, 0.8);
+	}
+
+	.signal-card strong {
+		display: block;
+		margin: 0.8rem 0 0.55rem;
+		font-size: 1.35rem;
+		letter-spacing: -0.04em;
+	}
+
+	.signal-card p {
+		margin: 0;
+		color: rgba(236, 243, 255, 0.74);
+	}
+
+	.terminal-frame {
+		position: absolute;
+		left: 0;
+		right: 2rem;
+		bottom: 4.5rem;
+		padding: 0;
+		border-radius: 30px;
+		overflow: hidden;
+	}
+
+	.terminal-bar {
+		display: flex;
+		align-items: center;
+		gap: 0.85rem;
+		padding: 1rem 1.2rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.terminal-lights {
+		display: inline-flex;
+		gap: 0.4rem;
+	}
+
+	.terminal-lights span {
+		width: 0.7rem;
+		height: 0.7rem;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.3);
+	}
+
+	.terminal-bar code {
+		font-size: 0.88rem;
+		color: rgba(236, 243, 255, 0.82);
+	}
+
+	.terminal-body {
+		display: grid;
+		gap: 0.8rem;
+		padding: 1rem 1.2rem 1.25rem;
+	}
+
+	.terminal-row {
+		display: grid;
+		grid-template-columns: 8.5rem 1fr auto;
+		gap: 0.75rem;
+		align-items: center;
+		padding: 0.95rem 1rem;
+		border-radius: 18px;
+		background: rgba(255, 255, 255, 0.035);
+	}
+
+	.lane-name {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 0.9rem;
+		color: #ffdca2;
+	}
+
+	.lane-copy {
+		color: rgba(236, 243, 255, 0.82);
+	}
+
+	.lane-copy strong {
+		color: #7cf2d6;
+	}
+
+	.lane-state {
+		padding: 0.45rem 0.72rem;
+		border-radius: 999px;
+		font-size: 0.74rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+	}
+
+	.lane-state.healthy {
+		background: rgba(124, 242, 214, 0.12);
+		color: #7cf2d6;
+	}
+
+	.lane-state.recovered {
+		background: rgba(255, 131, 87, 0.14);
+		color: #ffb58b;
+	}
+
+	.lane-state.waiting {
+		background: rgba(246, 214, 125, 0.14);
+		color: #f6d67d;
+	}
+
+	.signal-strip {
+		position: absolute;
+		left: 4rem;
+		right: 0;
+		bottom: 0;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.85rem;
+		padding: 1rem;
+		border-radius: 26px;
+	}
+
+	.signal-strip span,
+	.stat-item span,
+	.proof-card span {
+		display: block;
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: rgba(236, 243, 255, 0.52);
+	}
+
+	.signal-strip strong {
+		display: block;
+		margin-top: 0.45rem;
+		font-size: 1rem;
+		letter-spacing: -0.03em;
+	}
+
+	.stat-ribbon {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+		margin-top: 1.5rem;
+		padding: 1rem;
+		border-radius: 28px;
+		animation-delay: 240ms;
+	}
+
+	.stat-item {
+		padding: 1rem 1.1rem;
+		border-radius: 22px;
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.stat-item strong {
+		display: block;
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: clamp(2rem, 4vw, 3.3rem);
+		line-height: 1;
+		letter-spacing: -0.07em;
+	}
+
+	.section {
+		padding: 2rem 0 1.5rem;
+	}
+
+	.section-heading {
+		max-width: 46rem;
+		margin: 0 auto 2rem;
+		text-align: center;
+	}
+
+	.section-heading.left-align {
+		margin-inline: 0;
+		text-align: left;
+	}
+
+	.section-heading h2,
+	.final-cta-panel h2 {
+		margin: 1rem 0 0.85rem;
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: clamp(2.4rem, 4vw, 4.4rem);
+		line-height: 0.98;
+		letter-spacing: -0.06em;
+	}
+
+	.feature-stage {
+		padding-top: 4rem;
+	}
+
+	.feature-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.feature-tile {
+		padding: 1.3rem;
+		border-radius: 28px;
+		transition:
+			transform 180ms ease,
+			border-color 180ms ease,
+			background 180ms ease;
+	}
+
+	.feature-tile:hover,
+	.feature-tile:focus-within {
+		transform: translateY(-4px);
+		border-color: rgba(255, 255, 255, 0.16);
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
+			rgba(9, 17, 31, 0.88);
+	}
+
+	.feature-icon {
+		display: inline-grid;
+		place-items: center;
+		width: 3.1rem;
+		height: 3.1rem;
+		border-radius: 16px;
+		background: linear-gradient(135deg, rgba(124, 242, 214, 0.24), rgba(255, 131, 87, 0.22));
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 0.92rem;
+		font-weight: 700;
+		color: #ffffff;
+	}
+
+	.feature-tile h3,
+	.step-card h3 {
+		margin: 1rem 0 0.7rem;
+		font-size: clamp(1.7rem, 3vw, 2.5rem);
+		line-height: 1.02;
+		letter-spacing: -0.05em;
+	}
+
+	.feature-tile p {
+		margin: 0;
+		color: rgba(236, 243, 255, 0.78);
+	}
+
+	.demo-stage {
+		padding-top: 3.5rem;
+	}
+
+	.demo-panel {
+		display: grid;
+		grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.1fr);
+		gap: 1.25rem;
+		padding: 1.5rem;
+		border-radius: 34px;
+	}
+
+	.demo-copy h2 {
+		margin: 1rem 0 0.85rem;
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: clamp(2.3rem, 4vw, 4rem);
+		line-height: 0.98;
+		letter-spacing: -0.06em;
+	}
+
+	.demo-copy p {
+		margin: 0;
+		color: rgba(236, 243, 255, 0.76);
+		font-size: 1.04rem;
+		line-height: 1.75;
+	}
+
+	.demo-visual {
+		position: relative;
+		min-height: 18rem;
+		border-radius: 28px;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		background:
+			radial-gradient(circle at 25% 35%, rgba(255, 131, 87, 0.22), transparent 25%),
+			radial-gradient(circle at 70% 20%, rgba(124, 242, 214, 0.18), transparent 22%),
+			rgba(255, 255, 255, 0.03);
+		overflow: hidden;
+	}
+
+	.demo-track {
+		position: absolute;
+		left: 12%;
+		right: 12%;
+		top: 50%;
+		height: 2px;
+		background: linear-gradient(90deg, rgba(255, 255, 255, 0.16), rgba(124, 242, 214, 0.7), rgba(255, 131, 87, 0.7));
+		transform: translateY(-50%);
+	}
+
+	.demo-pulse {
+		position: absolute;
+		top: 50%;
+		width: 1rem;
+		height: 1rem;
+		margin-top: -0.5rem;
+		border-radius: 999px;
+		background: #f6d67d;
+		box-shadow: 0 0 26px rgba(246, 214, 125, 0.72);
+	}
+
+	.demo-pulse-one {
+		left: 18%;
+		animation: move-lane 6s ease-in-out infinite;
+	}
+
+	.demo-pulse-two {
+		left: 18%;
+		animation: move-lane 6s ease-in-out infinite 1.5s;
+	}
+
+	.demo-node {
+		position: absolute;
+		display: grid;
+		gap: 0.3rem;
+		padding: 1rem;
+		min-width: 8rem;
+		border-radius: 22px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		background: rgba(9, 17, 31, 0.82);
+		box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+	}
+
+	.demo-node span {
+		font-size: 0.76rem;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: rgba(236, 243, 255, 0.54);
+	}
+
+	.demo-node strong {
+		font-size: 1.05rem;
+		letter-spacing: -0.04em;
+	}
+
+	.demo-node-one {
+		left: 9%;
+		top: 18%;
+	}
+
+	.demo-node-two {
+		left: 39%;
+		bottom: 12%;
+	}
+
+	.demo-node-three {
+		right: 8%;
+		top: 20%;
+	}
+
+	.demo-timeline {
+		grid-column: 1 / -1;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.timeline-card {
+		padding: 1rem 1.05rem;
+		border-radius: 24px;
+	}
+
+	.timeline-card span {
+		display: block;
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: #ffdca2;
+	}
+
+	.timeline-card p {
+		margin: 0.75rem 0 0;
+		color: rgba(236, 243, 255, 0.76);
+	}
+
+	.operating-model {
+		padding-top: 3.5rem;
+	}
+
+	.operating-grid {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.steps-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.step-card {
+		padding: 1.3rem;
+		border-radius: 28px;
+	}
+
+	.step-index {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 3rem;
+		padding: 0.55rem 0.85rem;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.05);
+		font-family: 'Space Grotesk', sans-serif;
+		letter-spacing: -0.04em;
+		color: #ffdca2;
+	}
+
+	.proof-zone {
+		padding-top: 4rem;
+	}
+
+	.proof-banner,
+	.final-cta-panel {
+		padding: 1.5rem;
+		border-radius: 34px;
+	}
+
+	.proof-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+		margin-top: 2rem;
+	}
+
+	.proof-card {
+		padding: 1.15rem;
+		border-radius: 24px;
+		background: rgba(255, 255, 255, 0.035);
+	}
+
+	.proof-card p {
+		margin: 0.85rem 0 0;
+		font-size: 1rem;
+	}
+
+	.final-cta {
+		padding: 4rem 0 5rem;
+	}
+
+	.final-cta-panel {
+		display: grid;
+		gap: 1.25rem;
+		text-align: center;
+	}
+
+	.final-cta-panel h2 {
+		max-width: 14ch;
+		margin-inline: auto;
+	}
+
+	.final-cta-panel p {
+		max-width: 46rem;
+		margin: 0 auto;
+	}
+
+	.cta-actions {
+		justify-content: center;
+		margin-top: 0.2rem;
+	}
+
+	.cta-command {
+		margin: 0 auto;
+		min-width: min(100%, 24rem);
+	}
+
+	.doc-pills {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.75rem;
+	}
+
+	.doc-pills a {
+		padding: 0.7rem 1rem;
+		border-radius: 999px;
+		color: rgba(236, 243, 255, 0.88);
+	}
+
+	@keyframes rise-in {
+		from {
+			opacity: 0;
+			transform: translateY(18px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes slow-spin {
+		from {
+			transform: rotate(0deg);
+		}
+
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes slow-spin-reverse {
+		from {
+			transform: rotate(360deg);
+		}
+
+		to {
+			transform: rotate(0deg);
+		}
+	}
+
+	@keyframes move-lane {
+		0% {
+			left: 18%;
+			opacity: 0;
+			transform: scale(0.8);
+		}
+
+		12% {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		48% {
+			left: 48%;
+			opacity: 1;
+		}
+
+		78% {
+			left: 78%;
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		100% {
+			left: 82%;
+			opacity: 0;
+			transform: scale(0.8);
+		}
+	}
+
+	@media (max-width: 1100px) {
+		.masthead-bar,
+		.hero-grid,
+		.feature-grid,
+		.demo-panel,
+		.demo-timeline,
+		.steps-grid,
+		.proof-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.masthead-bar {
+			border-radius: 28px;
+		}
+
+		.masthead {
+			position: relative;
+		}
+
+		.masthead-bar,
+		.masthead-nav {
+			justify-content: flex-start;
+		}
+
+		.hero {
+			padding-top: 2.5rem;
+		}
+
+		.hero h1 {
+			max-width: 10.5ch;
+		}
+
+		.hero-visual {
+			min-height: 36rem;
+		}
+
+		.terminal-frame {
+			right: 0;
+		}
+
+		.signal-strip {
+			left: 0;
+			grid-template-columns: 1fr;
+		}
+
+		.stat-ribbon {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.shell {
+			width: min(calc(100% - 1.2rem), 1180px);
+		}
+
+		.masthead-bar,
+		.hero-copy,
+		.feature-panel,
+		.step-card,
+		.proof-banner,
+		.final-cta-panel {
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+
+		.masthead-nav {
+			gap: 0.15rem;
+		}
+
+		.masthead-nav a,
+		.nav-cta {
+			width: 100%;
+			justify-content: center;
+		}
+
+		.hero h1 {
+			font-size: clamp(3rem, 15vw, 4.3rem);
+		}
+
+		.hero-lead,
+		.section-heading p,
+		.feature-copy p,
+		.step-card p,
+		.proof-card p,
+		.final-cta-panel p {
+			font-size: 1rem;
+		}
+
+		.hero-visual {
+			min-height: 33rem;
+		}
+
+		.demo-visual {
+			min-height: 22rem;
+		}
+
+		.signal-card-primary {
+			width: 88%;
+		}
+
+		.terminal-row {
+			grid-template-columns: 1fr;
+		}
+
+		.terminal-frame {
+			bottom: 6.5rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero-copy,
+		.hero-visual,
+		.stat-ribbon,
+		.feature-tile,
+		.demo-panel,
+		.timeline-card,
+		.step-card,
+		.proof-banner,
+		.final-cta-panel,
+		.visual-orbit,
+		.demo-pulse {
+			animation: none;
+		}
+
+		html {
+			scroll-behavior: auto;
+		}
+	}
+</style>
