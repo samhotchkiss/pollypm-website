@@ -1,5 +1,5 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import DocsFrame from '../../components/DocsFrame.astro';
 
 const concepts = [
 	{
@@ -108,164 +108,98 @@ const failureModes = [
 ];
 ---
 
-<Layout
+<DocsFrame
 	title="Concepts and Architecture | PollyPM Docs"
 	description="Understand the core concepts, operating model, and architecture layers behind PollyPM."
+	heroTitle="How PollyPM is organized."
+	heroSummary="PollyPM is not just a launcher for AI agents. It is a control layer that keeps projects, sessions, worktrees, and operator actions connected so multi-agent execution stays manageable."
+	currentPath="/docs/concepts"
+	pills={['Concepts', 'Architecture', 'Lifecycle']}
 >
-	<div class="page-shell">
-		<header class="site-header">
-			<div class="container nav-row">
-				<a class="brand" href="/">
-					<span class="brand-mark"><span>PP</span></span>
-					<span class="brand-copy">
-						<small>PollyPM Docs</small>
-						<strong>Concepts and Architecture</strong>
-					</span>
-				</a>
-				<nav class="nav-links" aria-label="Documentation">
-					<a href="/">Home</a>
-					<a href="/docs">Docs</a>
-					<a href="/docs/getting-started">Getting Started</a>
-					<a href="/docs/concepts" aria-current="page">Concepts</a>
-					<a href="/docs/cli-reference">CLI Reference</a>
-					<a href="/docs/faq">FAQ</a>
-				</nav>
+	<section class="docs-section">
+		<div class="docs-section-head">
+			<span class="docs-eyebrow">Core Concepts</span>
+			<h2>The units PollyPM uses to turn several agent runs into one operable system.</h2>
+			<p class="docs-section-copy">These concepts are the vocabulary for everything else in the product and docs.</p>
+		</div>
+
+		<div class="docs-grid">
+			{
+				concepts.map((concept) => (
+					<article class="docs-card">
+						<strong>{concept.title}</strong>
+						<p>{concept.description}</p>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="docs-section">
+		<div class="docs-split">
+			<div class="docs-block">
+				<div class="docs-section-head">
+					<span class="docs-eyebrow">Architecture</span>
+					<h2>PollyPM sits between human direction and raw agent execution.</h2>
+				</div>
+				<ul class="docs-timeline">
+					{architectureLayers.map((item) => (
+						<li class="docs-timeline-item">
+							<span class="docs-step-index">Layer</span>
+							<strong>{item.title}</strong>
+							<span>{item.description}</span>
+						</li>
+					))}
+				</ul>
 			</div>
-		</header>
 
-		<main id="main-content">
-			<section class="docs-hero">
-				<div class="container">
-					<span class="eyebrow">Documentation</span>
-					<h1>How PollyPM is organized.</h1>
-					<p>
-						PollyPM is not just a launcher for AI agents. It is a control layer that keeps projects,
-						sessions, worktrees, and operator actions connected so multi-agent execution stays
-						manageable.
-					</p>
-					<div class="docs-meta">
-						<span class="chip">Concepts</span>
-						<span class="chip">Architecture</span>
-						<span class="chip">Lifecycle</span>
-					</div>
+			<div class="docs-block">
+				<div class="docs-section-head">
+					<span class="docs-eyebrow">Lifecycle</span>
+					<h2>Most runs follow the same loop from planning to promotion.</h2>
 				</div>
-			</section>
-
-			<section class="section">
-				<div class="container">
-					<div class="section-heading">
-						<h2>Core concepts</h2>
-						<p>These are the main units PollyPM uses to turn several agent runs into one operable system.</p>
-					</div>
-					<div class="concept-grid">
-						{
-							concepts.map((concept) => (
-								<article class="doc-card">
-									<strong>{concept.title}</strong>
-									<p>{concept.description}</p>
-								</article>
-							))
-						}
-					</div>
-				</div>
-			</section>
-
-			<section class="section">
-				<div class="container split-grid">
-					<div class="info-panel">
-						<div class="section-heading">
-							<h2>Architecture layers</h2>
-							<p>PollyPM sits between human direction and raw agent execution.</p>
-						</div>
-						<ul>
-							{architectureLayers.map((item) => (
-								<li>
-									<strong>{item.title}</strong>
-									<p>{item.description}</p>
-								</li>
-							))}
-						</ul>
-					</div>
-
-					<div class="info-panel">
-						<div class="section-heading">
-							<h2>Execution lifecycle</h2>
-							<p>Most runs follow the same loop from planning to promotion.</p>
-						</div>
-						<ul class="timeline">
-							{lifecycle.map((item) => (
-								<li>
-									<strong>{item.title}</strong>
-									<span>{item.description}</span>
-								</li>
-							))}
-						</ul>
-					</div>
-				</div>
-			</section>
-
-			<section class="section">
-				<div class="container">
-					<div class="section-heading">
-						<h2>What PollyPM is designed to prevent</h2>
-						<p>The value is not only more throughput. It is fewer coordination failures while agents are running.</p>
-					</div>
-					<div class="docs-grid">
-						{
-							failureModes.map((item) => (
-								<article class="doc-card">
-									<strong>{item.title}</strong>
-									<p>{item.description}</p>
-								</article>
-							))
-						}
-					</div>
-
-					<div class="cta-panel">
-						<div>
-							<h2>Read this page after getting started.</h2>
-							<p>
-								Use the getting started guide to launch PollyPM. Use this page to understand why the
-								project, session, and worktree model exists in the first place.
-							</p>
-						</div>
-						<div class="button-row">
-							<a class="button button-primary" href="/docs/getting-started">Open getting started</a>
-							<a class="button button-secondary" href="/docs/cli-reference">Open CLI reference</a>
-						</div>
-					</div>
-				</div>
-			</section>
-		</main>
-
-		<footer class="site-footer">
-			<div class="container footer-row">
-				<div class="footer-brand-block">
-					<a class="brand" href="/">
-						<span class="brand-mark"><span>PP</span></span>
-						<span class="brand-copy">
-							<small>PollyPM</small>
-							<strong>Concepts and architecture for multi-agent engineering</strong>
-						</span>
-					</a>
-				</div>
-				<div class="footer-link-groups">
-					<nav class="footer-nav-group" aria-label="Docs">
-						<strong>Docs</strong>
-						<a href="/docs">Docs home</a>
-						<a href="/docs/getting-started">Getting Started</a>
-						<a href="/docs/concepts" aria-current="page">Concepts</a>
-						<a href="/docs/cli-reference">CLI Reference</a>
-						<a href="/docs/faq">FAQ</a>
-					</nav>
-					<nav class="footer-nav-group" aria-label="Site">
-						<strong>Site</strong>
-						<a href="/">Home</a>
-						<a href="/#features">Features</a>
-						<a href="/#how-it-works">How it works</a>
-					</nav>
-				</div>
+				<ul class="docs-timeline">
+					{lifecycle.map((item) => (
+						<li class="docs-timeline-item">
+							<span class="docs-step-index">Phase</span>
+							<strong>{item.title}</strong>
+							<span>{item.description}</span>
+						</li>
+					))}
+				</ul>
 			</div>
-		</footer>
-	</div>
-</Layout>
+		</div>
+	</section>
+
+	<section class="docs-section">
+		<div class="docs-section-head">
+			<span class="docs-eyebrow">Failure Modes</span>
+			<h2>What PollyPM is designed to prevent.</h2>
+			<p class="docs-section-copy">The value is not only more throughput. It is fewer coordination failures while agents are running.</p>
+		</div>
+
+		<div class="docs-grid two-up">
+			{
+				failureModes.map((item) => (
+					<article class="docs-card">
+						<strong>{item.title}</strong>
+						<p>{item.description}</p>
+					</article>
+				))
+			}
+		</div>
+
+		<div class="docs-cta">
+			<div>
+				<span class="docs-card-label">Recommended sequence</span>
+				<strong>Read this page after getting started.</strong>
+				<p class="docs-section-copy">Use the getting started guide to launch PollyPM. Use this page to understand why the project, session, and worktree model exists in the first place.</p>
+			</div>
+
+			<div class="docs-actions">
+				<a class="docs-button primary" href="/docs/getting-started">Open getting started</a>
+				<a class="docs-button secondary" href="/docs/cli-reference">Open CLI reference</a>
+			</div>
+		</div>
+	</section>
+</DocsFrame>

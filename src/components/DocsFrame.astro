@@ -1,0 +1,745 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+interface NavItem {
+	href: string;
+	label: string;
+}
+
+interface Props {
+	title: string;
+	description: string;
+	heroTitle: string;
+	heroSummary: string;
+	heroKicker?: string;
+	pills?: string[];
+	currentPath: string;
+	navItems?: NavItem[];
+}
+
+const {
+	title,
+	description,
+	heroTitle,
+	heroSummary,
+	heroKicker = 'Documentation',
+	pills = [],
+	currentPath,
+	navItems = [
+		{ href: '/docs', label: 'Docs Home' },
+		{ href: '/docs/getting-started', label: 'Getting Started' },
+		{ href: '/docs/concepts', label: 'Concepts' },
+		{ href: '/docs/cli-reference', label: 'CLI Reference' },
+		{ href: '/docs/faq', label: 'FAQ' },
+	],
+} = Astro.props;
+---
+
+<Layout title={title} description={description}>
+	<div class="docs-shell">
+		<header class="docs-header">
+			<div class="docs-frame docs-header-bar">
+				<a class="docs-brand" href="/" aria-label="PollyPM home">
+					<span class="docs-brand-mark">PP</span>
+					<span class="docs-brand-copy">
+						<small>PollyPM Docs</small>
+						<strong>{heroTitle}</strong>
+					</span>
+				</a>
+
+				<nav class="docs-nav" aria-label="Documentation">
+					<a href="/">Home</a>
+					{
+						navItems.map((item) => (
+							<a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>
+								{item.label}
+							</a>
+						))
+					}
+				</nav>
+			</div>
+		</header>
+
+		<main id="main-content">
+			<section class="docs-hero">
+				<div class="docs-frame docs-hero-grid">
+					<div class="docs-hero-copy">
+						<span class="docs-kicker">{heroKicker}</span>
+						<h1>{heroTitle}</h1>
+						<p>{heroSummary}</p>
+						{pills.length > 0 && (
+							<div class="docs-pill-row">
+								{pills.map((pill) => <span>{pill}</span>)}
+							</div>
+						)}
+					</div>
+
+					<div class="docs-hero-panel" aria-hidden="true">
+						<div class="docs-hero-orbit docs-hero-orbit-large"></div>
+						<div class="docs-hero-orbit docs-hero-orbit-small"></div>
+						<div class="docs-status-card">
+							<span>Current page</span>
+							<strong>{heroTitle}</strong>
+							<p>{currentPath}</p>
+						</div>
+						<div class="docs-status-list">
+							<div>
+								<span>Read first</span>
+								<strong>/docs/getting-started</strong>
+							</div>
+							<div>
+								<span>Then expand</span>
+								<strong>/docs/concepts</strong>
+							</div>
+							<div>
+								<span>Operate daily</span>
+								<strong>/docs/cli-reference</strong>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="docs-frame docs-main">
+				<slot />
+			</div>
+		</main>
+
+		<footer class="docs-footer">
+			<div class="docs-frame docs-footer-bar">
+				<div class="docs-footer-copy">
+					<a class="docs-brand" href="/">
+						<span class="docs-brand-mark">PP</span>
+						<span class="docs-brand-copy">
+							<small>PollyPM</small>
+							<strong>Documentation for multi-agent software delivery</strong>
+						</span>
+					</a>
+					<p>Use the docs to move from first launch to an operator-grade multi-agent workflow.</p>
+				</div>
+
+				<nav class="docs-footer-links" aria-label="Docs footer">
+					<a href="/docs">Docs Home</a>
+					<a href="/docs/getting-started">Getting Started</a>
+					<a href="/docs/concepts">Concepts</a>
+					<a href="/docs/cli-reference">CLI Reference</a>
+					<a href="/docs/faq">FAQ</a>
+				</nav>
+			</div>
+		</footer>
+	</div>
+</Layout>
+
+<style>
+	.docs-shell {
+		position: relative;
+		overflow: clip;
+	}
+
+	.docs-shell::before,
+	.docs-shell::after {
+		content: '';
+		position: fixed;
+		pointer-events: none;
+		filter: blur(72px);
+		opacity: 0.62;
+		z-index: 0;
+	}
+
+	.docs-shell::before {
+		top: 8rem;
+		left: -7rem;
+		width: 22rem;
+		height: 22rem;
+		background: rgba(255, 131, 87, 0.16);
+	}
+
+	.docs-shell::after {
+		right: -5rem;
+		bottom: 8rem;
+		width: 24rem;
+		height: 24rem;
+		background: rgba(124, 242, 214, 0.14);
+	}
+
+	.docs-frame {
+		position: relative;
+		z-index: 1;
+		width: min(1180px, calc(100% - 2rem));
+		margin: 0 auto;
+	}
+
+	.docs-header {
+		position: sticky;
+		top: 0;
+		z-index: 24;
+		padding: 1rem 0 0;
+	}
+
+	.docs-header-bar,
+	.docs-main,
+	.docs-footer-bar,
+	.docs-status-card,
+	.docs-status-list,
+	:global(.docs-card),
+	:global(.docs-block),
+	:global(.docs-cta),
+	:global(.docs-callout),
+	:global(.docs-command-item),
+	:global(.docs-timeline-item) {
+		position: relative;
+		border: 1px solid rgba(255, 255, 255, 0.09);
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+			rgba(9, 17, 31, 0.82);
+		box-shadow:
+			0 28px 65px rgba(0, 0, 0, 0.22),
+			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+		backdrop-filter: blur(18px);
+	}
+
+	.docs-header-bar::before,
+	.docs-main::before,
+	.docs-footer-bar::before,
+	.docs-status-card::before,
+	.docs-status-list::before,
+	:global(.docs-card)::before,
+	:global(.docs-block)::before,
+	:global(.docs-cta)::before,
+	:global(.docs-callout)::before,
+	:global(.docs-command-item)::before,
+	:global(.docs-timeline-item)::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		padding: 1px;
+		background: linear-gradient(
+			135deg,
+			rgba(255, 255, 255, 0.2),
+			rgba(255, 255, 255, 0.02) 35%,
+			rgba(124, 242, 214, 0.16) 70%,
+			rgba(255, 131, 87, 0.18)
+		);
+		-webkit-mask:
+			linear-gradient(#fff 0 0) content-box,
+			linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+		mask-composite: exclude;
+		pointer-events: none;
+	}
+
+	.docs-header-bar,
+	.docs-footer-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1rem 1.15rem;
+		border-radius: 999px;
+	}
+
+	.docs-brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.85rem;
+		text-decoration: none;
+	}
+
+	.docs-brand-mark {
+		display: grid;
+		place-items: center;
+		width: 2.8rem;
+		height: 2.8rem;
+		border-radius: 18px;
+		font-family: 'Space Grotesk', sans-serif;
+		font-weight: 700;
+		letter-spacing: -0.05em;
+		color: #09111a;
+		background: linear-gradient(135deg, #7cf2d6 0%, #f6d67d 52%, #ff8357 100%);
+		box-shadow: 0 12px 28px rgba(255, 131, 87, 0.22);
+	}
+
+	.docs-brand-copy small,
+	.docs-brand-copy strong {
+		display: block;
+	}
+
+	.docs-brand-copy small {
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: rgba(236, 243, 255, 0.6);
+	}
+
+	.docs-brand-copy strong {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 1rem;
+		letter-spacing: -0.03em;
+	}
+
+	.docs-nav,
+	.docs-footer-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem;
+	}
+
+	.docs-nav a,
+	.docs-footer-links a,
+	:global(.docs-inline-link) {
+		padding: 0.55rem 0.85rem;
+		border-radius: 999px;
+		color: rgba(236, 243, 255, 0.76);
+		text-decoration: none;
+		transition:
+			background 180ms ease,
+			transform 180ms ease,
+			color 180ms ease;
+	}
+
+	.docs-nav a[aria-current='page'],
+	.docs-nav a:hover,
+	.docs-nav a:focus-visible,
+	.docs-footer-links a:hover,
+	.docs-footer-links a:focus-visible,
+	:global(.docs-inline-link:hover),
+	:global(.docs-inline-link:focus-visible) {
+		background: rgba(255, 255, 255, 0.06);
+		color: #ffffff;
+		transform: translateY(-1px);
+	}
+
+	.docs-hero {
+		position: relative;
+		padding: 4.75rem 0 2rem;
+	}
+
+	.docs-hero::before {
+		content: '';
+		position: absolute;
+		inset: 0 0 auto;
+		height: 36rem;
+		background:
+			radial-gradient(circle at 12% 18%, rgba(255, 131, 87, 0.22), transparent 22%),
+			radial-gradient(circle at 78% 20%, rgba(124, 242, 214, 0.16), transparent 24%),
+			linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+		z-index: 0;
+	}
+
+	.docs-hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.7fr);
+		gap: 1.5rem;
+		align-items: center;
+	}
+
+	.docs-kicker,
+	:global(.docs-eyebrow) {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.45rem 0.8rem;
+		border-radius: 999px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		background: rgba(255, 255, 255, 0.04);
+		font-size: 0.76rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: #ffdca2;
+	}
+
+	.docs-hero-copy h1 {
+		margin: 1rem 0 0.85rem;
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: clamp(3rem, 6vw, 5.2rem);
+		line-height: 0.95;
+		letter-spacing: -0.07em;
+		max-width: 11ch;
+	}
+
+	.docs-hero-copy p,
+	.docs-footer-copy p,
+	:global(.docs-section-copy),
+	:global(.docs-card p),
+	:global(.docs-block p),
+	:global(.docs-callout p),
+	:global(.docs-command-item span),
+	:global(.docs-timeline-item span) {
+		color: rgba(236, 243, 255, 0.76);
+		line-height: 1.72;
+	}
+
+	.docs-pill-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin-top: 1.4rem;
+	}
+
+	.docs-pill-row span,
+	:global(.docs-mini-pill) {
+		padding: 0.64rem 0.92rem;
+		border-radius: 999px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		background: rgba(255, 255, 255, 0.04);
+		color: rgba(236, 243, 255, 0.9);
+	}
+
+	.docs-hero-panel {
+		position: relative;
+		min-height: 24rem;
+	}
+
+	.docs-hero-orbit {
+		position: absolute;
+		border-radius: 999px;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		animation: docs-spin 18s linear infinite;
+	}
+
+	.docs-hero-orbit-large {
+		inset: 1rem;
+	}
+
+	.docs-hero-orbit-small {
+		inset: 4rem;
+		animation-direction: reverse;
+		animation-duration: 13s;
+	}
+
+	.docs-status-card {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: min(19rem, 100%);
+		padding: 1.2rem;
+		border-radius: 28px;
+		transform: rotate(3deg);
+	}
+
+	.docs-status-card span,
+	.docs-status-list span,
+	:global(.docs-card-label),
+	:global(.docs-command-label),
+	:global(.docs-step-index) {
+		display: block;
+		font-size: 0.76rem;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		color: rgba(236, 243, 255, 0.52);
+	}
+
+	.docs-status-card strong,
+	.docs-status-list strong {
+		display: block;
+		margin-top: 0.5rem;
+		font-size: 1.1rem;
+		letter-spacing: -0.04em;
+	}
+
+	.docs-status-card p {
+		margin: 0.6rem 0 0;
+		font-family: 'SFMono-Regular', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+		font-size: 0.9rem;
+		color: #7cf2d6;
+	}
+
+	.docs-status-list {
+		position: absolute;
+		left: 0;
+		right: 2rem;
+		bottom: 0;
+		display: grid;
+		gap: 0.85rem;
+		padding: 1rem;
+		border-radius: 28px;
+	}
+
+	.docs-main {
+		padding: 1.2rem;
+		border-radius: 34px;
+	}
+
+	:global(.docs-section) {
+		padding: 1rem 0 1.2rem;
+	}
+
+	:global(.docs-section + .docs-section) {
+		border-top: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	:global(.docs-section-head) {
+		max-width: 44rem;
+		margin-bottom: 1.6rem;
+	}
+
+	:global(.docs-section-head h2) {
+		margin: 0.8rem 0 0.75rem;
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: clamp(2rem, 3.6vw, 3.5rem);
+		line-height: 1;
+		letter-spacing: -0.06em;
+	}
+
+	:global(.docs-grid) {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	:global(.docs-grid.two-up) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	:global(.docs-card),
+	:global(.docs-block),
+	:global(.docs-callout),
+	:global(.docs-command-item),
+	:global(.docs-timeline-item),
+	:global(.docs-cta) {
+		border-radius: 28px;
+		padding: 1.2rem;
+	}
+
+	:global(.docs-card strong),
+	:global(.docs-block strong),
+	:global(.docs-callout strong) {
+		display: block;
+		font-size: 1.2rem;
+		letter-spacing: -0.04em;
+	}
+
+	:global(.docs-card p),
+	:global(.docs-block p),
+	:global(.docs-callout p) {
+		margin: 0.7rem 0 0;
+	}
+
+	:global(.docs-card-link) {
+		text-decoration: none;
+		transition:
+			transform 180ms ease,
+			border-color 180ms ease;
+	}
+
+	:global(.docs-card-link:hover),
+	:global(.docs-card-link:focus-visible) {
+		transform: translateY(-4px);
+		border-color: rgba(255, 255, 255, 0.16);
+	}
+
+	:global(.docs-split) {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	:global(.docs-list),
+	:global(.docs-command-list),
+	:global(.docs-timeline) {
+		display: grid;
+		gap: 0.9rem;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	:global(.docs-list li) {
+		padding-left: 1rem;
+		position: relative;
+		color: rgba(236, 243, 255, 0.84);
+	}
+
+	:global(.docs-list li::before) {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.78rem;
+		width: 0.45rem;
+		height: 0.45rem;
+		border-radius: 999px;
+		background: linear-gradient(135deg, #7cf2d6, #ff8357);
+	}
+
+	:global(.docs-command-item code),
+	:global(.docs-snippet code) {
+		display: block;
+		font-family: 'SFMono-Regular', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+		font-size: 0.92rem;
+		color: #f7fbff;
+		word-break: break-word;
+	}
+
+	:global(.docs-command-item span),
+	:global(.docs-timeline-item span) {
+		display: block;
+		margin-top: 0.6rem;
+	}
+
+	:global(.docs-snippet) {
+		margin-top: 0.8rem;
+		padding: 1rem;
+		border-radius: 20px;
+		background: rgba(5, 11, 20, 0.6);
+		overflow-x: auto;
+	}
+
+	:global(.docs-timeline-item) {
+		padding-left: 1.2rem;
+	}
+
+	:global(.docs-timeline-item strong) {
+		display: block;
+		margin-top: 0.4rem;
+		font-size: 1rem;
+	}
+
+	:global(.docs-cta) {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 1rem;
+		align-items: center;
+		margin-top: 1.3rem;
+	}
+
+	:global(.docs-actions) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.85rem;
+		justify-content: flex-end;
+	}
+
+	:global(.docs-button) {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.9rem 1.2rem;
+		border-radius: 999px;
+		text-decoration: none;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		transition:
+			transform 180ms ease,
+			box-shadow 180ms ease,
+			background 180ms ease;
+	}
+
+	:global(.docs-button:hover),
+	:global(.docs-button:focus-visible) {
+		transform: translateY(-2px);
+	}
+
+	:global(.docs-button.primary) {
+		color: #07111f;
+		background: linear-gradient(135deg, #7cf2d6 0%, #f6d67d 52%, #ff8357 100%);
+		box-shadow: 0 20px 45px rgba(255, 131, 87, 0.2);
+	}
+
+	:global(.docs-button.secondary) {
+		color: #eef4ff;
+		background: rgba(255, 255, 255, 0.05);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+	}
+
+	.docs-footer {
+		padding: 1.25rem 0 2.25rem;
+	}
+
+	.docs-footer-bar {
+		border-radius: 34px;
+	}
+
+	.docs-footer-copy {
+		max-width: 34rem;
+	}
+
+	.docs-footer-copy p {
+		margin: 0.8rem 0 0;
+	}
+
+	@keyframes docs-spin {
+		from {
+			transform: rotate(0deg);
+		}
+
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	@media (max-width: 1100px) {
+		.docs-header {
+			position: relative;
+		}
+
+		.docs-header-bar,
+		.docs-hero-grid,
+		.docs-footer-bar,
+		:global(.docs-grid),
+		:global(.docs-grid.two-up),
+		:global(.docs-split),
+		:global(.docs-cta) {
+			grid-template-columns: 1fr;
+		}
+
+		.docs-header-bar,
+		.docs-footer-bar {
+			border-radius: 30px;
+		}
+
+		.docs-hero-panel {
+			min-height: 21rem;
+		}
+
+		.docs-status-list {
+			right: 0;
+		}
+
+		:global(.docs-actions) {
+			justify-content: flex-start;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.docs-frame {
+			width: min(calc(100% - 1.2rem), 1180px);
+		}
+
+		.docs-header-bar,
+		.docs-main,
+		.docs-footer-bar {
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+
+		.docs-nav a,
+		.docs-footer-links a {
+			width: 100%;
+			justify-content: center;
+			display: inline-flex;
+		}
+
+		.docs-hero {
+			padding-top: 2.75rem;
+		}
+
+		.docs-hero-copy h1 {
+			font-size: clamp(2.7rem, 13vw, 4.2rem);
+		}
+
+		.docs-hero-panel {
+			min-height: 24rem;
+		}
+
+		.docs-status-card {
+			width: 88%;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.docs-hero-orbit {
+			animation: none;
+		}
+	}
+</style>
